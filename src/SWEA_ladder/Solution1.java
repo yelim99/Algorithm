@@ -2,7 +2,7 @@ package SWEA_ladder;
 
 import java.util.Scanner;
 
-public class Ladder1 {
+public class Solution1 {
 
 	public static void main(String[] args) {
 		
@@ -39,22 +39,24 @@ public class Ladder1 {
 			if (arr[0][c] == 1) {
 				start = c;
 				x = c;
-				for (int r=c; r<100; r++) {
+				for (int r=0; r<100; r++) {
 					y = r;
 					for (int d=0; d<2; d++) {		// 좌우 탐색
 						int nc = c+dc[d];			// nr 없어도??
 						
 						if (r>=0 && r<100 && nc>=0 && nc<100) {
 							if (arr[r][nc] == 1) {		// 좌우 탐색했을 때 1이면
-								if (nc < c) {			// 1인 곳의 x좌표가 현재 x좌표보다 작으면
+								System.out.println(arr[r][nc]);	// 1인지 확인 출력
+								
+								if (nc < x) {			// 1인 곳의 x좌표가 현재 x좌표보다 작으면
 									x -= 1;				// 현재 좌표 1빼기
 								} else {				// 아니면
 									x += 1;				// 현재 좌표 1 더하기
 								}
-							} else if (arr[r][nc] == 0) {		// 0이면
-								y += 1;		// 현재 y좌표 1 더하기
 							}
-							
+//						 else if (arr[r][nc] == 0 && arr[r][nc] != 2) {		
+//								y += 1;		// 현재 y좌표 1 더하기
+//							}
 							
 						}
 						
