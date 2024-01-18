@@ -3,47 +3,59 @@ package SWEA_ladder;
 import java.util.Scanner;
 
 public class Solution2 {
+	
+	static int[] dx = {-1, 1};
+	static boolean road;
+	static int[][] arr = new int[100][100];
+	
+	public static int searchStart(int y, int x) {
+		while(true) {
+			if (y==0) break;
+			road = false;
+			for(int d=0; d<2; d++) {
+				int nx = x+dx[d];
+				if (nx<0 || nx>=100) continue;
+				if (arr[y][nx] == 1) {
+					road = true;
+					x = nx;
+					while (true) {
+						nx = x+dx[d];
+						if (nx<0 || nx>=100 || arr[y][nx]==0) break;
+						else x = nx;
+					}
+				}
+				if (road) break;
+			}
+			y--;
+		}
+		return x;
+	}
 
+	
 	public static void main(String[] args) {
 		
-Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		
-		int n = sc.nextInt();
-		
-		int[][] arr = new int[100][100];
-		
-		// 좌우 탐색
-		int[] dr = {-1, 0, 0};
-		int[] dc = {0, -1, 1};
-		
-		int x = 99;	// x좌표 
-		int y = 0;	// y좌표
-		
-		// 배열 요소 입력받기
-		for(int r=0; r<100; r++) {
-			for(int c=0; c<100; c++) {
-				arr[r][c] = sc.nextInt();
-				if (arr[99][c] == 2) {
-					x = c;
+		int test;
+		int result = 0;
+			
+		for(int t=1; t<=10; t++) {
+			test = sc.nextInt();
+			for(int i=0; i<100; i++) {
+				for(int y=0; y<100; y++) {
+					arr[i][y] = sc.nextInt();
 				}
 			}
-		}
 		
-		while (y != 0) {
-			for (int d=0; d<3; d++) {
-				int nr = x+dr[d];
-				int nc = y+dc[d];
-				
-				if (nr>=0 && nr<100 && nc>=0 && nc<100) {
-					x = nr;
-					y = nc;
-					arr[nr][nc] = 0;
+			for(int i=0; i<100; i++) {
+				if (arr[99][i] == 2) {
+					result = searchStart(99, i);
+					break;
 				}
-				else continue;
 			}
+			
+			System.out.printf("#%d %d\n", test, result);
 		}
-		
-		System.out.printf("#%d %d", n, x);
 		
 	}
 
