@@ -1,6 +1,7 @@
 package Stack_Queue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,19 +21,28 @@ public class Solution_1966 {
 			
 			// 셀렉션 알고리즘
 			for(int j=0; j<n; j++) {
-				arr[i] = sc.nextInt();
-				maxIdx = i;
-				for(int z=j+1; j<n; j++) {
+				arr[j] = sc.nextInt();
+			}
+			System.out.println(Arrays.toString(arr));
+			
+			for(int j=0; j<m; j++) {
+				maxIdx = j;
+				for(int z=j+1; z<n; z++) {
 					if (arr[z] > arr[maxIdx]) {
 						maxIdx = z;
 					}
-					int temp = arr[z];
-					arr[z] = arr[maxIdx];
-					arr[maxIdx] = temp;
+					
 				}
+				int temp = arr[j];
+				arr[j] = arr[maxIdx];
+				arr[maxIdx] = temp;
 			}
+			System.out.println("after="+Arrays.toString(arr));
+			System.out.println("maxIdx="+maxIdx);
+			System.out.println("m="+arr[m]);
 			
-			
+			List<Integer> arrList = new ArrayList<>();
+			arrList.sort(null);
 			
 			
 			

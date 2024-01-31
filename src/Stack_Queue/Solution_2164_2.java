@@ -1,4 +1,4 @@
-package Simulation;
+package Stack_Queue;
 
 import java.util.LinkedList;
 import java.util.Queue;
