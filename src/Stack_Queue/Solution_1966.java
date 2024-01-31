@@ -2,6 +2,7 @@ package Stack_Queue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,36 +16,36 @@ public class Solution_1966 {
 			int n = sc.nextInt();	// 문서의 개수
 			int m = sc.nextInt();	// 인덱스
 			
-			int[] arr = new int[n];	// 중요도
-			int max = 0;
-			int maxIdx = 0;
+			LinkedList<int[]> arr = new LinkedList<>();
+			boolean isMax = true;
+			int count = 0;
 			
-			// 셀렉션 알고리즘
 			for(int j=0; j<n; j++) {
-				arr[j] = sc.nextInt();
+				arr.add(new int[] {j, sc.nextInt()});
 			}
-			System.out.println(Arrays.toString(arr));
+			System.out.println(Arrays.toString(arr.get(1)));
 			
-			for(int j=0; j<m; j++) {
-				maxIdx = j;
-				for(int z=j+1; z<n; z++) {
-					if (arr[z] > arr[maxIdx]) {
-						maxIdx = z;
+			while (!arr.isEmpty()) {
+				int[] front = arr.poll();
+				
+				
+				System.out.println("front="+Arrays.toString(front));
+				
+				for(int j=0; j<arr.size(); j++) {
+					if (front[1] < arr.get(j)[1]) {
+						arr.offer(front);
+						for(int z=0; z<j; z++) {
+							arr.offer(arr.poll());
+						}
+						isMax = false;
+						break;
 					}
-					
 				}
-				int temp = arr[j];
-				arr[j] = arr[maxIdx];
-				arr[maxIdx] = temp;
+				if (isMax == false) continue;
+				count++;
+				
+				if (front[0] == count) break;			
 			}
-			System.out.println("after="+Arrays.toString(arr));
-			System.out.println("maxIdx="+maxIdx);
-			System.out.println("m="+arr[m]);
-			
-			List<Integer> arrList = new ArrayList<>();
-			arrList.sort(null);
-			
-			
 			
 //			for(int j=0; j<n-1; j++) {
 //				// 이렇게 하면 처음에만 0번째 검사, 두번째부터는 0-1-.. 검사 안됨
@@ -54,6 +55,8 @@ public class Solution_1966 {
 //				}
 //			}
 //			System.out.println(impList);
+			
+			System.out.println(count);
 			
 		}
 		
