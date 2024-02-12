@@ -1,4 +1,4 @@
-package BOJ_10816_숫자카드2;
+package W2_BOJ_10816_숫자카드2;
 
 import java.io.BufferedReader;
 import java.io.IOException;

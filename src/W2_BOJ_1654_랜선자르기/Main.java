@@ -1,4 +1,4 @@
-package BOJ_1654_랜선자르기;
+package W2_BOJ_1654_랜선자르기;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package BOJ_1620_포켓몬마스터;
+package W2_BOJ_1620_포켓몬마스터;
 
 import java.util.HashMap;
 import java.util.Map;

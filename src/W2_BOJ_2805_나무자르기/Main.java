@@ -1,4 +1,4 @@
-package BOJ_2805_나무자르기;
+package W2_BOJ_2805_나무자르기;
 
 import java.util.Scanner;
 

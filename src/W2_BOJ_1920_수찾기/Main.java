@@ -1,4 +1,4 @@
-package BOJ_1920_수찾기;
+package W2_BOJ_1920_수찾기;
 
 import java.util.Arrays;
 import java.util.Scanner;

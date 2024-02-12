@@ -1,4 +1,4 @@
-package BOJ_9375_패션왕신해빈;
+package W2_BOJ_9375_패션왕신해빈;
 
 import java.io.BufferedReader;
 import java.io.IOException;

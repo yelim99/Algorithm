@@ -1,4 +1,4 @@
-package BOJ_2470_두용액;
+package W2_BOJ_2470_두용액;
 
 import java.io.BufferedReader;
 import java.io.IOException;
