@@ -11,13 +11,11 @@ public class Main {
 	
 	static int n;
 	static int m;
-	static int cnt = Integer.MAX_VALUE;
-	static int temp;
 	static int graph[][];
 	static boolean visited[][];
 	static int[] dr = {-1, 1, 0, 0, -1, -1, 1, 1};
 	static int[] dc = {0, 0, -1, 1, -1, 1, -1, 1};
-	static Queue<int[]> q = new LinkedList<>();
+	
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) 아기상어2
@@ -46,11 +44,12 @@ public class Main {
 		
 		for(int i=0; i<n; i++) {
 			for(int j=0; j<m; j++) {
-				if (graph[i][j]==1) {
-					q.add(new int[] {i, j});
-					
-					if (cnt > max) {
-						max = cnt;
+				if (graph[i][j]==0) {
+					// bfs 호출하여 반환된 값(거리)를 저장
+					int tmp = bfs(i, j);
+					// 값이 더 큰 지 검사
+					if (tmp > max) {
+						max = tmp;
 					}
 				}
 			}
@@ -62,25 +61,44 @@ public class Main {
 	
 	
 	//bfs 메소드
-	public static void bfs() {
+	public static int bfs(int x, int y) {
 		visited = new boolean[n][m];	// 초기화
+		Queue<int[]> q = new LinkedList<>();
 		
+		// 큐에 x,y 좌표와 현재까지의 거리를 저장
+		q.add(new int[] {x, y, 0});
+		visited[x][y] = true;	// 방문했음을 체크
+		
+		// 큐에 요소가 없을 때까지
 		while (!q.isEmpty()) {
 			int[] cur = q.poll();	// 큐의 맨 앞에 있는 값 빼주기
 			
+			// 델타 탐색하면서 검사
 			for(int d=0; d<8; d++) {
 				int nr = cur[0]+dr[d];
 				int nc = cur[1]+dc[d];
+				int val = cur[2];
 				
-				// 몰라몰라
-				if (nr>=0 && nr<n && nc>=0 && nc<m && !visited[nr][nc] && graph[nr][nc]==0) {
-					visited[nr][nc] = true;
-					q.add(new int[] {nr, nc});
+				// 범위 벗어나면 
+				if (nr<0 || nr>=n || nc<0 || nc>=m) {
+					continue;
 				}
+				// 방문한 적이 있으면
+				if (visited[nr][nc]==true) {
+					continue;
+				}
+				// 상어가 있는 곳이면 거리에 +1 하고 반환
+				if (graph[nr][nc]==1) {
+					return val+1;
+				}
+				// 방문 표시
+				visited[nr][nc] = true;
+				// 큐에 nr, nc 좌표와 거리+1 값 저장
+				q.add(new int[] {nr, nc, val+1});
 			}
-			
 		}
-		
+		return 0;
 	}
+			
 	
 }
