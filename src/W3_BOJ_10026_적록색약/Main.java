@@ -7,10 +7,14 @@ import java.io.InputStreamReader;
 public class Main {
 	
 	static int n;
-	static char[][] graph;
-	static boolean[][] visited;
+	static char[][] colorGraph;
+	static char[][] nonColorGraph;
+	static boolean[][] colorVisited;
+	static boolean[][] nonVisited;
 	static int[] dr = {-1, 1, 0, 0};
 	static int[] dc = {0, 0, -1, 1};
+	static String color = "color";
+	static String non = "non";
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		
@@ -28,62 +32,57 @@ public class Main {
 		
 		n = Integer.parseInt(br.readLine());
 		
-		graph = new char[n][n];
-		visited = new boolean[n][n];
+		colorGraph = new char[n][n];
+		nonColorGraph = new char[n][n];
+		colorVisited = new boolean[n][n];
+		nonVisited = new boolean[n][n];
 		
-		// graph에 값 넣어주기
+		// colorGraph에 값 넣어주기
+		// 적록색약 아닌 사람
 		for(int i=0; i<n; i++) {
 			String s = br.readLine();
 			for(int j=0; j<n; j++) {
-				graph[i][j] = s.charAt(j);
+				char c = s.charAt(j);
+				colorGraph[i][j] = c;
+				if (c=='G') {
+					c = 'R';
+				}
+				nonColorGraph[i][j] = c;
 			}
 		}
+	
 		
-		int rcnt = 1;
-		int bcnt = 1;
-		int gcnt = 1;
-		
+		int colorcnt = 0;
+		int noncnt=0;
 		
 		for(int i=0; i<n; i++) {
 			for(int j=0; j<n; j++) {
-				if (graph[i][j] == 'R' && !visited[i][j]) {
-					dfs(i, j);
-					rcnt++;
+				if (!colorVisited[i][j]) {
+					dfs(i, j, colorGraph, colorVisited);
+					colorcnt++;
 				}
-				else if (graph[i][j] == 'G' && !visited[i][j]) {
-					dfs(i, j);
-					gcnt++;
-				}
-				else if (graph[i][j] == 'B' && !visited[i][j]) {
-					dfs(i, j);
-					bcnt++;
+				if (!nonVisited[i][j]) {
+					dfs(i, j, nonColorGraph, nonVisited);
+					noncnt++;
 				}
 			}
 		}
-		
-		int rgb = rcnt+gcnt+bcnt;
-		
-		System.out.println(rgb);
+
+		System.out.println(colorcnt+" "+noncnt);
 	}
 	
-	public static void dfs(int x, int y) {
+	public static void dfs(int x, int y, char[][] color, boolean[][] visited) {
 		visited[x][y] = true;
 		
 		for(int d=0; d<4; d++) {
 			int nr = x+dr[d];
 			int nc = y+dc[d];
-			
-			if (nr>=0 && nr<n && nc>=0 && nc<n && !visited[nr][nc]) {
-				if (graph[nr][nc] == 'R') {
-					dfs(nr, nc);
-				}
-				if (graph[nr][nc] == 'G') {
-					dfs(nr, nc);
-				}
-				if (graph[nr][nc] == 'B') {
-					dfs(nr, nc);
+			if (nr>=0 && nr<n && nc>=0 && nc<n) {
+				if (!visited[nr][nc] && color[nr][nc] == color[x][y]) {
+					dfs(nr, nc, color, visited);
 				}
 			}
+			
 		}
 	}
 
