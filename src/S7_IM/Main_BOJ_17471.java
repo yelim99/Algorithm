@@ -8,9 +8,12 @@ public class Main_BOJ_17471 {
 	
 	static int n;
 	static List<List<Integer>> graph = new ArrayList<>();
-	static int[] pop;
+	static int[] area;		// 각 지역의 선거구 저장 (1, 2)
+	static int[] population;	// 인구 수 저장할 배열
+	static int pop1;
+	static int pop2;
 	static boolean[] visited;
-	static int cnt;
+	static int min;
 
 	public static void main(String[] args) {
 		/* 문제) 게리맨더링1
@@ -30,12 +33,12 @@ public class Main_BOJ_17471 {
 		
 		n = sc.nextInt();
 		
-		pop = new int[n+1];
-		visited = new boolean[n+1];
+		population = new int[n+1];
+//		visited = new boolean[n+1];
 		
 		// 인구 수 입력받아서 배열에 저장
 		for(int i=1; i<=n; i++) {
-			pop[i] = sc.nextInt();
+			population[i] = sc.nextInt();
 		}
 		
 		// 인접 리스트 만들 리스트 생성
@@ -43,26 +46,77 @@ public class Main_BOJ_17471 {
 			graph.add(new ArrayList<>());
 		}
 		
-		// 인접 리스트에 값 저장
+		// 인접 리스트에 연결되어 있는지 확인할 값 저장
 		for(int i=1; i<=n; i++) {
 			int num = sc.nextInt();
 			for(int j=0; j<num; j++) {
 				int x = sc.nextInt();
 				graph.get(i).add(x);
-				graph.get(x).add(i);
-			}	
+				graph.get(x).add(i);	// 인덱스 오류 ㅜ
+			}		
 		}
 		
-		cnt = 0;
+		// 지역 별 선거구를 나타낼 배열 (1, 2로 저장)
+		area = new int[n+1];
+		min = Integer.MAX_VALUE;
 		
+		areaDfs(1);
+		
+		if(min == Integer.MAX_VALUE) {
+			System.out.println(-1);
+		}
+		else {
+			System.out.println(min);
+		}
 		
 		
 	}
 	
-	static void dfs(int n) {
-		visited[n] = true;
+	// 구역을 나누는 dfs 탐색
+	static void areaDfs(int k) {
+		if (k == n+1) {
+			pop1 = 0;
+			pop2 = 0;
+			for(int i=1; i<=n; i++) {
+				if (area[i] == 1) {
+					pop1 += population[i];
+				}
+				else {
+					pop2 += population[i];
+				}
+			}
 		
+			visited = new boolean[n+1];
+			int link = 0;	// 연결된 지역 개수
+			
+			for(int i=1; i<=n; i++) {
+				if (!visited[i]) {
+					dfs(i, area[i]);
+					link++;
+				}
+			}
+			if (link == 2) {
+				min = Math.min(min, Math.abs(pop1-pop2));
+			}
+			return;
+		}
 		
+		area[k] = 1;
+		areaDfs(k+1);
+		
+		area[k] = 2;
+		areaDfs(k+1);
+	}
+	
+	// 구역 체크해서 
+	static void dfs(int idx, int num) {
+		visited[idx] = true;
+		
+		for(int i=1; i<=n; i++) {
+			if (graph.get(idx).get(i)==1 && !visited[i] && area[i]==num) {
+				dfs(i, num);
+			}
+		}
 	}
 
 }
