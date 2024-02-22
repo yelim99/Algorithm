@@ -1,13 +1,14 @@
 package S7_IM;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main_BOJ_17471 {
 	
 	static int n;
-	static List<List<Integer>> graph = new ArrayList<>();
+	static int[][] graph;
 	static int[] area;		// 각 지역의 선거구 저장 (1, 2)
 	static int[] population;	// 인구 수 저장할 배열
 	static int pop1;
@@ -15,7 +16,7 @@ public class Main_BOJ_17471 {
 	static boolean[] visited;
 	static int min;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		/* 문제) 게리맨더링1
 		 * 공평하게 선거구를 나누기 위해 두 선거구에 포함된 인구의 차이를 최소로 하려고 한다. 
 		 * 백준시의 정보가 주어졌을 때, 인구 차이의 최솟값을 구해보자.
@@ -29,30 +30,29 @@ public class Main_BOJ_17471 {
 		 * 구역 A가 구역 B와 인접하면 구역 B도 구역 A와 인접하다. 인접한 구역이 없을 수도 있다.
 		 */
 
-		Scanner sc = new Scanner(System.in);
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		n = sc.nextInt();
+		n = Integer.parseInt(br.readLine());
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		
 		population = new int[n+1];
 //		visited = new boolean[n+1];
 		
 		// 인구 수 입력받아서 배열에 저장
 		for(int i=1; i<=n; i++) {
-			population[i] = sc.nextInt();
+			population[i] = Integer.parseInt(st.nextToken());
 		}
 		
-		// 인접 리스트 만들 리스트 생성
-		for(int i=1; i<=n; i++) {
-			graph.add(new ArrayList<>());
-		}
+		graph = new int[n+1][n+1];
 		
 		// 인접 리스트에 연결되어 있는지 확인할 값 저장
 		for(int i=1; i<=n; i++) {
-			int num = sc.nextInt();
+			st = new StringTokenizer(br.readLine());
+			int num = Integer.parseInt(st.nextToken());
 			for(int j=0; j<num; j++) {
-				int x = sc.nextInt();
-				graph.get(i).add(x);
-				graph.get(x).add(i);	// 인덱스 오류 ㅜ
+				int x = Integer.parseInt(st.nextToken());
+				graph[i][x] = 1;
+				graph[x][i] = 1;
 			}		
 		}
 		
@@ -113,7 +113,7 @@ public class Main_BOJ_17471 {
 		visited[idx] = true;
 		
 		for(int i=1; i<=n; i++) {
-			if (graph.get(idx).get(i)==1 && !visited[i] && area[i]==num) {
+			if (graph[idx][i]==1 && !visited[i] && area[i]==num) {
 				dfs(i, num);
 			}
 		}

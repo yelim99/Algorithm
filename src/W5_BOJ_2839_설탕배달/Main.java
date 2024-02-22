@@ -16,19 +16,25 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		
 		int total = sc.nextInt();
-		int[] arr = {5, 3};
 		int cnt = 0;
 		
-		for(int kg : arr) {
-			cnt += total/kg;
-			total %= kg;
-		}
-		
-		if (total != 0) {
-			System.out.println(-1);
-		}
-		else {
-			System.out.println(cnt);
+		while (true) {
+			// 5로 나누어지는지 확인
+			// 나누어지면 cnt에 5로 나눈 값을 더해주고 출력 후 break
+			if (total%5==0) {
+				cnt += total/5;
+				System.out.println(cnt);
+				break;
+			}
+			// 5로 나누어지지 않는데, total이 0보다 작으면(정확하게 나누어떨어지지 않으면)
+			// -1 출력 후 break
+			else if (total<0){
+				System.out.println(-1);
+				break;
+			}
+			// 5로 나누어 떨어지지 않으면 total에서 3을 빼주고 cnt++
+			total -= 3;
+			cnt++;
 		}
 	}
 
