@@ -6,14 +6,12 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-
+class Meeting {
+	int start;
+	int end;
+}
 
 public class Main {
-	
-	static class Meeting {
-		int start;
-		int end;
-	}
 
 	public static void main(String[] args) throws IOException {
 		
