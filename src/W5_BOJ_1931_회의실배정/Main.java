@@ -52,12 +52,17 @@ public class Main {
 			}
 		});
 	
-		int endTime = 0;
-		int cnt = 0;
+		
+		int endTime = 0;	// 종료 시간 초기화
+		int cnt = 0;		// 회의 개수 셀 변수
+		
+		// 회의 개수만큼 반복
 		for(int i=0; i<n; i++) {
+			// 시작시간이 끝나는 시간보다 크거나 같으면
 			if (arr[i].start>=endTime) {
+				// 종료시간을 해당 회의의 종료시간으로 설ㅈㅈㅇ
 				endTime = arr[i].end;
-				cnt++;
+				cnt++;	// 개수 1 증가
 				
 			}
 		}
