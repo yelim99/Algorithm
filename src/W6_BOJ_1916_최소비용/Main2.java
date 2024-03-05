@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main2 {
 
-	static int[] graph;
+//	static List<List<Integer>> graph = new ArrayList<>();
+	static int[][] graph;
 	static boolean[] visited;
 	
 	
@@ -28,10 +29,12 @@ public class Main {
 		st = new StringTokenizer(br.readLine());
 		int m = Integer.parseInt(st.nextToken());
 		
-		graph = new int[n+1];
-		visited = new boolean[n+1];
+//		for(int i=0; i<n+1; i++) {
+//			graph.add(new ArrayList<>());
+//		}
 		
-		int min = Integer.MAX_VALUE;
+		graph = new int[n+1][n+1];
+		visited = new boolean[n+1];
 		
 		for (int i=0; i<m; i++) {
 			st = new StringTokenizer(br.readLine());
@@ -39,13 +42,20 @@ public class Main {
 			int arrive = Integer.parseInt(st.nextToken());
 			int cost = Integer.parseInt(st.nextToken());
 			
-			// 우엑.... 도착점까지 오는데 최소비용 구해주기
-			graph[arrive] = Math.min(min, cost);
-
+			graph[depart][arrive] = cost;
+			graph[arrive][depart] = cost;
 			
+//			graph.get(depart).add(arrive, cost);
+//			graph.get(arrive).add(depart, cost);
 		}
 		
 		
+//		for(int i=0; i<graph.size(); i++) {
+//			for(int j=0; j<graph.get(i).size(); j++) {
+//				System.out.print(graph.get(i).get(j));
+//			}
+//			System.out.println();
+//		}
 		
 		st = new StringTokenizer(br.readLine());
 		int start = Integer.parseInt(st.nextToken());
@@ -57,7 +67,10 @@ public class Main {
 	
 	static void search(int num) {
 		visited[num] = true;
-	
+		
+		for(int i=0; i<graph[num].length; i++) {
+			
+		}
 	}
 
 }
