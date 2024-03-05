@@ -31,7 +31,7 @@ public class Main {
 		graph = new int[n+1];
 		visited = new boolean[n+1];
 		
-		int min = Integer.MAX_VALUE;
+		
 		
 		for (int i=0; i<m; i++) {
 			st = new StringTokenizer(br.readLine());
@@ -40,7 +40,8 @@ public class Main {
 			int cost = Integer.parseInt(st.nextToken());
 			
 			// 우엑.... 도착점까지 오는데 최소비용 구해주기
-			graph[arrive] = Math.min(min, cost);
+			
+			
 
 			
 		}
