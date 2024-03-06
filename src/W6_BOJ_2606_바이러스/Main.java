@@ -34,6 +34,11 @@ public class Main {
 		visited = new boolean[n+1];
 		
 		// 리스트 선언
+		// 0번인덱스만 생성되니까 인덱스에러..!!!@
+//		for(int i=1; i<=n; i++) {
+//			graph.add(new ArrayList<>());
+//		}
+		
 		for(int i=0; i<n+1; i++) {
 			graph.add(new ArrayList<>());
 		}

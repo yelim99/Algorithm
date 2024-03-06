@@ -8,11 +8,9 @@ import java.util.StringTokenizer;
 public class Main {
 	
 	static int n;
-	static int[][] arr;
+	static int[] colValue;
 	static boolean[][] check;
 	static int cnt;
-	static int[] dr = {-1, 1, 0, 0, -1, -1, 1, 1};
-	static int[] dc = {0, 0, -1, 1, -1, 1, -1, 1};
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) N-Queen
@@ -25,12 +23,12 @@ public class Main {
 		
 		n = Integer.parseInt(st.nextToken());
 		
-		arr = new int[n][n];
+		colValue = new int[n];
 		check = new boolean[n][n];
 		
 	}
 	
-	static void queen(int r, int c) {
+	static void queen() {
 		
 	}
 
