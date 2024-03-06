@@ -31,14 +31,7 @@ public class Main {
 	}
 	
 	static void queen(int r, int c) {
-		for(int d=0; d<8; d++) {
-			int nr = r+dr[d];
-			int nc = c+dc[d];
-			
-			if (nr>=0 && nr<n && nc>=0 && nc<n) {
-				check[nr][nc] = true;
-			}
-		}
+		
 	}
 
 }

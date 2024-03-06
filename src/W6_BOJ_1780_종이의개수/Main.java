@@ -35,9 +35,7 @@ public class Main {
 			}
 		}
 		
-//		ans1 = 0;
-//		ans2 = 0;
-//		ans3 = 0;
+		// 메소드 호출
 		divide(0, 0, n);
 		
 		System.out.println(ans1);
@@ -78,7 +76,8 @@ public class Main {
 			else if (total==cnt2) ans2++;
 			else ans3++;
 		}
-		// 다르면
+		
+		// 다르면 종이 잘라주고, 자른만큼 또 재귀 호출
 		else {
 			int cut = size/3;
 			for(int i=0; i<3; i++) {

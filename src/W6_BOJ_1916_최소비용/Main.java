@@ -9,9 +9,10 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-	static int[] graph;
+	static int n;
+	static int[][] graph;
 	static boolean[] visited;
-	
+	static int[] distance;
 	
 	public static void main(String[] args) throws IOException {
 		/* 문제) 최소비용 구하기
@@ -24,11 +25,11 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 
-		int n = Integer.parseInt(st.nextToken());
+		n = Integer.parseInt(st.nextToken());
 		st = new StringTokenizer(br.readLine());
 		int m = Integer.parseInt(st.nextToken());
 		
-		graph = new int[n+1];
+		graph = new int[n+1][n+1];
 		visited = new boolean[n+1];
 		
 		
@@ -39,25 +40,57 @@ public class Main {
 			int arrive = Integer.parseInt(st.nextToken());
 			int cost = Integer.parseInt(st.nextToken());
 			
-			// 우엑.... 도착점까지 오는데 최소비용 구해주기
-			
-			
+			graph[depart][arrive] = cost;
+			graph[arrive][depart] = cost;
 
-			
 		}
 		
-		
+		// 최소값 구하기 위해 i와 j가 같지 않고, graph 값이 0이면 max값 설정해주기
+		for(int i=1; i<=n; i++) {
+			for(int j=1; j<=n; j++) {
+				if (i!=j && graph[i][j]==0) {
+					graph[i][j] = Integer.MAX_VALUE;
+				}
+			}
+		}
 		
 		st = new StringTokenizer(br.readLine());
 		int start = Integer.parseInt(st.nextToken());
 		int end = Integer.parseInt(st.nextToken());
 		
+		search(start);
 		
-		
+		System.out.println(distance[end]);
 	}
 	
 	static void search(int num) {
+		distance = new int[n+1];
+		
+		// 초기값 설정해주기
+		for(int i=0; i<n; i++) {
+			distance[i] = graph[num][i];
+		}
+		
+		int min = Integer.MAX_VALUE;
+		int idx = 0;
+		for(int i=0; i<n; i++) {
+			if (distance[i]<min && !visited[i]) {
+				min = distance[i];
+				idx = i;
+			}
+		}
+		
 		visited[num] = true;
+		for(int i=1; i<=n-2; i++) {
+			int cur = idx;
+			visited[cur] = true;
+			for(int j=1; j<=n; j++) {
+				if (!visited[j]) {
+					distance[j] = Math.min(distance[cur]+graph[cur][j], graph[cur][j]);
+				}
+			}
+		}
+		
 	
 	}
 
