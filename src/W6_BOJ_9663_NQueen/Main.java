@@ -8,8 +8,8 @@ import java.util.StringTokenizer;
 public class Main {
 	
 	static int n;
-	static int[] colValue;
-	static boolean[][] check;
+	static int[] value;
+//	static boolean[][] check;
 	static int cnt;
 
 	public static void main(String[] args) throws IOException {
@@ -23,13 +23,31 @@ public class Main {
 		
 		n = Integer.parseInt(st.nextToken());
 		
-		colValue = new int[n];
-		check = new boolean[n][n];
+		value = new int[n];
 		
 	}
 	
-	static void queen() {
+	static void queen(int depth) {
+		if (depth == n) {
+			cnt++;
+			return;
+		}
 		
+//		for(int i=0; i<n; i++) {
+//			if (possible(depth)) {
+//				queen(depth+1);
+//			}
+//		}
 	}
+	
+//	static boolean possible(int col) {
+//		for(int i=0; i<col; i++) {
+//			if(value[i] == col) {
+//				return false;
+//			}
+//			
+//			// 대각선 확인
+//		}
+//	}
 
 }
