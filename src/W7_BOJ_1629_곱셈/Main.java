@@ -28,18 +28,23 @@ public class Main {
 		
 	}
 	
+	// 제곱 구하는 메소드
 	static long pow(long a, long b, long c) {
+		// b가 1이면 c로 나눈 나머지 그대로 리턴
 		if (b==1) {
 			return a%c;
 		}
+		
+		// 짝수이면 b를 2로 나눠서 재귀
 		if (b%2 == 0) {
 			long num = pow(a, b/2, c);
 			return (num*num)%c;
 		}
+		// 홀수이면 b-1을 2로 나눠서 재귀, a 한 번 더 곱해주기
 		else {
 			long num = pow(a, (b-1)/2, c);
 			return ((num*num)%c*a)%c;
-			// 여기...!! num*num이 long 범위를 벗어나는 경우가 있는 듯..! 여기서 한번 나머지 계산 해줘야 함..
+			// num*num이 long 범위를 벗어나는 경우가 있는 듯. 여기서 한번 나머지 계산 해줘야 함..
 		}
 	}
 

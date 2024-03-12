@@ -9,6 +9,7 @@ public class Main {
 	
 	static int n, r, c;
 	static int[][] arr;
+	static int cnt;	
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) Z
@@ -25,10 +26,37 @@ public class Main {
 		n = Integer.parseInt(st.nextToken());
 		r = Integer.parseInt(st.nextToken());
 		c = Integer.parseInt(st.nextToken());
+		
+		find(r, c, (int)(Math.pow(2, n)));
+		
+		System.out.println(cnt);
 
 	}
 	
-	static void divide(int r, int c, int size) {
+	static void find(int r, int c, int size) {
+		if (size==1) {
+			return;
+		}
+		
+		// 1사분면에 있을 때
+		if (r<size/2 && c<size/2) {
+			find(r, c, size/2);
+		}
+		// 2사분면에 있을 때 1사분면 개수 더해주기
+		else if (r<size/2 && c>=size/2) {
+			cnt += (size*size)/4;
+			find(r, c-size/2, size/2);
+		}
+		// 3사분면일 때 1, 2사분면 개수 더해주기
+		else if (r>=size/2 && c<size/2) {
+			cnt += (size*size/4)*2;
+			find(r-size/2, c, size/2);
+		}
+		// 4사분면일 때 1, 2, 3사분면 개수 더해주기
+		else {
+			cnt += (size*size/4)*3;
+			find(r-size/2, c-size/2, size/2);
+		}
 		
 	}
 
