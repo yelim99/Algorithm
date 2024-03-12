@@ -27,5 +27,9 @@ public class Main {
 		c = Integer.parseInt(st.nextToken());
 
 	}
+	
+	static void divide(int r, int c, int size) {
+		
+	}
 
 }

@@ -26,7 +26,7 @@ public class Solution_1215_회문1 {
 			for (int i = 0; i < 8; i++) {
 				for (int j = 0; j < 8 - n + 1; j++) {
 					check = true;
-					for (int k = 0; k < n/2; k++) {
+					for (int k = 0; k < n/2; k++) {	// 반만 찾으면 됨
 						if (arr[i][j+k] != arr[i][j-k+n-1]) {
 							check = false;
 						}
