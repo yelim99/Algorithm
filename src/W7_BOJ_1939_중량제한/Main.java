@@ -7,14 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+
 public class Main {
 	
 	static int n, m;
-	static List<List<Integer>> graph = new ArrayList<>(); 
+	static List<bridge> graph = new ArrayList<>(); 
+	static boolean[] check;
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) 중량제한
-		 * 
+		 * 각각의 다리마다 중량제한이 있기 때문에 무턱대고 물품을 옮길 순 없다. 
+		 * 한 번의 이동에서 옮길 수 있는 물품들의 중량의 최댓값을 구하는 프로그램을 작성하시오.
 		 */
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -23,30 +26,50 @@ public class Main {
 		n = Integer.parseInt(st.nextToken());
 		m = Integer.parseInt(st.nextToken());
 		
-		for(int i=0; i<n; i++) {
-			graph.add(new ArrayList<>());
-		}
+		
+		int left = 0;
+		int right = 0;
 		
 		for(int i=0; i<m; i++) {
 			st = new StringTokenizer(br.readLine());
 			int a = Integer.parseInt(st.nextToken());
 			int b = Integer.parseInt(st.nextToken());
-			int c = Integer.parseInt(st.nextToken());
+			int w = Integer.parseInt(st.nextToken());
 			
-//			graph.get(a).add(null)
+			graph.add(a, new bridge(b, w));
+			graph.add(b, new bridge(a, w));
+			
+			// right에 최대값 저장
+			right = Math.max(right, w);
 		}
 		
 		st = new StringTokenizer(br.readLine());
 		int f1 = Integer.parseInt(st.nextToken());
 		int f2 = Integer.parseInt(st.nextToken());
 		
-		int max = 0;
 		
-		
-		
-		System.out.println(max);
+		// 이분탐색
+		while (left <= right) {
+			int mid = (left+right)/2;
+			int ans = -1;
+			check = new boolean[n+1];
+			
+		}
 
 	}
 	
+	
+	
+
+}
+
+class bridge {
+	int dep;
+	int weight;
+	
+	public bridge(int dep, int weight) {
+		this.dep = dep;
+		this.weight = weight;
+	}
 
 }
