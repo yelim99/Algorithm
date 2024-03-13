@@ -3,16 +3,19 @@ package W7_BOJ_1939_중량제한;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 
 public class Main {
 	
 	static int n, m;
-	static List<bridge> graph = new ArrayList<>(); 
-	static boolean[] check;
+	static int start, end;
+	static List<List<bridge>> graph = new ArrayList<>(); 
+	static boolean[] visited;
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) 중량제한
@@ -26,8 +29,11 @@ public class Main {
 		n = Integer.parseInt(st.nextToken());
 		m = Integer.parseInt(st.nextToken());
 		
+		for(int i=0; i<=n; i++) {
+			graph.add(new ArrayList<>());
+		}
 		
-		int left = 0;
+		int left = Integer.MAX_VALUE;
 		int right = 0;
 		
 		for(int i=0; i<m; i++) {
@@ -36,40 +42,73 @@ public class Main {
 			int b = Integer.parseInt(st.nextToken());
 			int w = Integer.parseInt(st.nextToken());
 			
-			graph.add(a, new bridge(b, w));
-			graph.add(b, new bridge(a, w));
+			graph.get(a).add(new bridge(b, w));
+			graph.get(b).add(new bridge(a, w));
 			
-			// right에 최대값 저장
+			// 최대, 최소값 저장
 			right = Math.max(right, w);
+			left = Math.min(left, w);
 		}
 		
 		st = new StringTokenizer(br.readLine());
-		int f1 = Integer.parseInt(st.nextToken());
-		int f2 = Integer.parseInt(st.nextToken());
+		start = Integer.parseInt(st.nextToken());
+		end = Integer.parseInt(st.nextToken());
 		
-		
+		int ans = 0;
 		// 이분탐색
 		while (left <= right) {
 			int mid = (left+right)/2;
-			int ans = -1;
-			check = new boolean[n+1];
+			visited = new boolean[n+1];
 			
+			if (bfs(mid)) {
+				left = mid+1;
+				ans = mid;
+			}
+			else {
+				end = mid-1;
+			}
 		}
 
+		System.out.println(ans);
+		
 	}
 	
+	// 연결 확인
+	static boolean bfs(int limit) {
+		Queue<Integer> q = new ArrayDeque<>();
+		q.add(start);
+		visited[start] = true;
+		
+		while(!q.isEmpty()) {
+			int cur = q.poll();
+			
+			// 도착점까지 갔다면 연결되어 있음. true 반환
+			if (cur == end) {
+				return true;
+			}
+			
+			for(int i=0; i<graph.get(cur).size(); i++) {
+				if (graph.get(cur).get(i).weight >= limit && !visited[graph.get(cur).get(i).go]) {
+					visited[graph.get(cur).get(i).go] = true;
+					q.add(graph.get(cur).get(i).go);
+				}
+			}
+		}
+		return false;
+	}
 	
+
+	static class bridge {
+		int go;
+		int weight;
+		
+		public bridge(int go, int weight) {
+			this.go = go;
+			this.weight = weight;
+		}
+	
+	}
 	
 
 }
 
-class bridge {
-	int dep;
-	int weight;
-	
-	public bridge(int dep, int weight) {
-		this.dep = dep;
-		this.weight = weight;
-	}
-
-}
