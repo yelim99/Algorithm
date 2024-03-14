@@ -9,13 +9,14 @@ import java.util.StringTokenizer;
 
 public class Main {
 	
-	static int n, l, r;
+	static int n, L, R;
 	static int[][] population;
 	static boolean[][] visited;
 	static int[] dr = {-1, 1, 0, 0};
 	static int[] dc = {0, 0, -1, 1};
 	static int sum;
 	static List<Integer> list;
+//	static int days;
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) 인구 이동
@@ -32,8 +33,8 @@ public class Main {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		
 		n = Integer.parseInt(st.nextToken());
-		l = Integer.parseInt(st.nextToken());
-		r = Integer.parseInt(st.nextToken());
+		L = Integer.parseInt(st.nextToken());
+		R = Integer.parseInt(st.nextToken());
 		
 		population = new int[n][n];
 		visited = new boolean[n][n];
@@ -50,36 +51,66 @@ public class Main {
 		
 		
 		
+		System.out.println(move());
+		System.out.println(list);
 		
+	}
 
-	}
-	
-	static void move() {
+	// dfs 탐색하면서 국경선 열 수 있는지 확인
+	static void dfs(int r, int c) {
+		if (r<0 || r>=n || c<0 || c>=n) return;
 		
-		while(true) {
-			boolean check = false;
-			
-			
-			
-		}
-		
-		
-	}
-	
-	static void search(int r, int c) {
 		for(int d=0; d<4; d++) {
 			int nr = r+dr[d];
 			int nc = c+dc[d];
 			
+			// 범위 안에 있고, 차가 조건에 부합하다면 방문 표시
 			if (nr>=0 && nr<n && nc>=0 && nc<n) {
-				if (l <= Math.abs(population[r][c]-population[nr][nc]) 
-					&& r >= Math.abs(population[r][c]-population[nr][nc])) {
-					visited[r][c] = visited[nr][nc] = true;
-					list.add(population[nr][nc]);
-					search(nr, nc);
+				int diff = Math.abs(population[r][c]-population[nr][nc]);
+				if (L <= diff && R >= diff) {
+					visited[r][c] = true;
+					list.add(population[r][c]);
+					
+					// 이미 방문한 곳이면 넘어가기
+					if (!visited[nr][nc]) {
+						dfs(nr, nc);
+					}
 				}
 			}
 		}
+	}
+	
+	static int move() {
+		int days = 0;
+		while(true) {
+			boolean check = false;
+			visited = new boolean[n][n];
+			
+			for(int i=0; i<n; i++) {
+				for(int j=0; j<n; j++) {
+					if(!visited[i][j]) {
+						dfs(i, j);
+						if (list.size()>1) {
+							for(int x : list) {
+								sum += x;
+							}
+							int avg = sum/list.size();
+							population[i][j] = avg;
+							check = true;
+						}
+					}
+				}
+			}
+			if (!check) {
+				return days;
+			}
+			days++;
+			
+			
+			
+		}
+		
+		
 	}
 
 }
