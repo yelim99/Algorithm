@@ -5,21 +5,21 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-class Node {
+class Node2 {
 	int data;
-	Node left;
-	Node right;
+	Node2 left;
+	Node2 right;
 	
-	Node() {}
+	Node2() {}
 	
-	Node(int data) {
+	Node2(int data) {
 		this.data = data;
 	}
 }
 
 public class Main_5639 {
 	
-	static Node root;
+	static Node2 root;
 
 	public static void main(String[] args) throws IOException {
 		
@@ -39,7 +39,7 @@ public class Main_5639 {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		root = new Node(Integer.parseInt(br.readLine()));
+		root = new Node2(Integer.parseInt(br.readLine()));
 		
 		String s;
 		
@@ -56,9 +56,9 @@ public class Main_5639 {
 	}	// main 끝 -----------------------------
 	
 	
-	// 데이터 노드에 추가하는 메소드 - 내부에서 addNode 메소드 호출
+	// 데이터 노드에 추가하는 메소드 - 내부에서 addNode2 메소드 호출
 	static void add(int n) {
-		Node newNode = new Node();
+		Node2 newNode = new Node2();
 		newNode.data = n;
 		
 		if (root == null) {
@@ -70,7 +70,7 @@ public class Main_5639 {
 	}
 	
 	// 데이터를 비교하며 탐색하여 자식 노드에 데이터 넣어주는 메소드
-	static Node addNode(Node node, Node newNode) {
+	static Node2 addNode(Node2 node, Node2 newNode) {
 		if (node == null) {
 			return newNode;
 		}
@@ -85,7 +85,7 @@ public class Main_5639 {
 	}
 	
 	// 후위 순회
-	static void postorder(Node node) {
+	static void postorder(Node2 node) {
 		if (node == null) {
 			return;
 		}
