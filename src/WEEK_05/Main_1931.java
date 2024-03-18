@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-class Meeting {
+class MeetingTime {
 	int start;
 	int end;
 }
@@ -31,11 +31,11 @@ public class Main_1931 {
 		
 		int n = Integer.parseInt(st.nextToken());
 		
-		Meeting[] arr = new Meeting[n];
+		MeetingTime[] arr = new MeetingTime[n];
 		
 		for(int i=0; i<n; i++) {
 			st = new StringTokenizer(br.readLine());
-			Meeting m = new Meeting();
+			MeetingTime m = new MeetingTime();
 			m.start = Integer.parseInt(st.nextToken());
 			m.end = Integer.parseInt(st.nextToken());
 			arr[i] = m;	
