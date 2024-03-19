@@ -3,16 +3,33 @@ package W8_BOJ_21608_상어초등학교;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.StringTokenizer;
+
+class Seat {
+	int r;
+	int c;
+	int likeFriend;
+	int empty;
+	
+	public Seat(int r, int c, int likeFriend, int empty) {
+		super();
+		this.r = r;
+		this.c = c;
+		this.likeFriend = likeFriend;
+		this.empty = empty;
+	}
+	
+	
+}
 
 public class Main {
 	
 	static int n;
 	static int[][] seat;
-	static int[][] like;
-	static int[][] empty;
-	static int sum;
-	static int[] order;	// 순서?
+	static HashMap<Integer, int[]> hash;
 	static int[] dr = {-1, 1, 0, 0};
 	static int[] dc = {0, 0, -1, 1};
 
@@ -35,42 +52,133 @@ public class Main {
 		n = Integer.parseInt(st.nextToken());
 		
 		seat = new int[n][n];
-		like = new int[n][n];
-		empty = new int[n][n];
-		order = new int[n*n];
+		hash = new HashMap<>();
 		
 		// 좋아하는 학생 입력 받아서 저장
 		for(int i=0; i<n*n; i++) {
 			st = new StringTokenizer(br.readLine());
+			
+			int student = Integer.parseInt(st.nextToken());
+			int[] like = new int[4];
 			for(int j=0; j<4; j++) {
-				int x = Integer.parseInt(st.nextToken());
-				order[i] = x;
-				like[x][j] = Integer.parseInt(st.nextToken());
+				like[j] = Integer.parseInt(st.nextToken());
 			}
+			// 좋아하는 친구 hash에 저장
+			hash.put(student, like);
+			
+			// 자리 앉기
+			findSeat(student);
 		}
 		
-		// 맨 처음 값은 무조건 1,1이네! 상하좌우 비어있고, 행, 열 최소 값!
-		seat[1][1] = order[0];
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<n; j++) {
+				System.out.print(seat[i][j]+" ");
+			}
+			System.out.println();
+		}
 		
-		// 요 다음부터 좋아하는 학생부터 검사해줘야해!
-
-	}
-	
-	static void search(int r, int c) {
-		int likeCnt = 0;
-		for (int d=0; d<4; d++) {
-			int nr = r+dr[d];
-			int nc = c+dc[d];
-			
-			if (nr>=0 && nr<n*n && nc>=0 && nc<n*n) {
-				// 자리에 좋아하는 학생이 있는지
-				for (int i=0; i<4; i++) {
-					if (like[seat[r][c]][i] == seat[nr][nc]) {
-						likeCnt++;
+		int sum = 0;
+		
+		
+		// 점수 구하기
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<n; j++) {
+				int cnt = 0;
+				int[] friends = hash.get(seat[i][j]);
+				for(int d=0; d<4; d++) {
+					int nr = i+dr[d];
+					int nc = j+dc[d];
+					
+					if (nr>=0 && nr<n && nc>=0 && nc<n) {
+						for(int x=0; x<4; x++) {
+							if (seat[nr][nc] == friends[x]) {
+								cnt++;
+							}
+						}
+					}
+					
+					// 1명-1, 2명-10, 3명-100, 4명-1000
+					switch(cnt) {
+					case 1: 
+						sum+=1;
+						break;
+					case 2:
+						sum+=10;
+						break;
+					case 3:
+						sum+=100;
+						break;
+					case 4: 
+						sum+=1000;
+						break;
 					}
 				}
 			}
 		}
+		
+		System.out.println(sum);
+		
+
 	}
+	
+	// 자리 찾는 메소드
+	static void findSeat(int student) {
+		int[] friends = hash.get(student);
+		// 정렬을 해주기 위해 리스트에 저장
+		List<Seat> seats = new ArrayList<>();
+		
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<n; j++) {
+				
+				int likeCnt = 0;
+				int emptyCnt = 0;
+				for (int d=0; d<4; d++) {
+					int nr = i+dr[d];
+					int nc = j+dc[d];
+					
+					if (nr>=0 && nr<n && nc>=0 && nc<n) {
+						// 자리에 좋아하는 학생이 있는지
+						for (int x=0; x<4; x++) {
+							if (seat[nr][nc] == friends[x]) {
+								likeCnt++;
+							}
+						}
+						
+						// 빈칸인지 확인
+						if (seat[nr][nc] == 0) {
+							emptyCnt++;
+						}
+					}
+				}
+				seats.add(new Seat(i, j, likeCnt, emptyCnt));
+			}
+		}
+		
+		// 정렬
+		// 좋아하는 학생이 많은 칸 -> 비어있는 칸이 많은 칸 -> 행 작은 칸 -> 열 작은 칸
+		seats.sort((o1, o2) -> {
+			if (o1.likeFriend == o2.likeFriend) {
+				if (o1.empty == o2.empty) {
+					if (o1.r == o2.r) {
+						return o1.c - o2.c;
+					}
+					return o1.r - o2.r;
+				}
+				return o1.empty - o2.empty;
+			}
+			return o1.likeFriend - o2.likeFriend;
+		});
+		
+		// 자리 넣어주기
+		for(Seat s : seats) {
+			if (seat[s.r][s.c] == 0) {
+				seat[s.r][s.c] = student;
+				return;
+			}
+		}
+		
+	}
+	
+
 
 }
