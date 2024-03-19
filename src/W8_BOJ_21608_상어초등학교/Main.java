@@ -11,6 +11,10 @@ public class Main {
 	static int[][] seat;
 	static int[][] like;
 	static int[][] empty;
+	static int sum;
+	static int[] order;	// 순서?
+	static int[] dr = {-1, 1, 0, 0};
+	static int[] dc = {0, 0, -1, 1};
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) 상어초등학교
@@ -33,14 +37,40 @@ public class Main {
 		seat = new int[n][n];
 		like = new int[n][n];
 		empty = new int[n][n];
+		order = new int[n*n];
 		
-		for(int i=0; i<n; i++) {
+		// 좋아하는 학생 입력 받아서 저장
+		for(int i=0; i<n*n; i++) {
 			st = new StringTokenizer(br.readLine());
-			for(int j=0; j<n; j++) {
-				
+			for(int j=0; j<4; j++) {
+				int x = Integer.parseInt(st.nextToken());
+				order[i] = x;
+				like[x][j] = Integer.parseInt(st.nextToken());
 			}
 		}
+		
+		// 맨 처음 값은 무조건 1,1이네! 상하좌우 비어있고, 행, 열 최소 값!
+		seat[1][1] = order[0];
+		
+		// 요 다음부터 좋아하는 학생부터 검사해줘야해!
 
+	}
+	
+	static void search(int r, int c) {
+		int likeCnt = 0;
+		for (int d=0; d<4; d++) {
+			int nr = r+dr[d];
+			int nc = c+dc[d];
+			
+			if (nr>=0 && nr<n*n && nc>=0 && nc<n*n) {
+				// 자리에 좋아하는 학생이 있는지
+				for (int i=0; i<4; i++) {
+					if (like[seat[r][c]][i] == seat[nr][nc]) {
+						likeCnt++;
+					}
+				}
+			}
+		}
 	}
 
 }
