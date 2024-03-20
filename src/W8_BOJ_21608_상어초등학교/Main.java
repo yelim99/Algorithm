@@ -66,7 +66,7 @@ public class Main {
 		
 		map = new int[n][n];
 		hash = new HashMap<>();
-		order = new int[n*n];
+//		order = new int[n*n];
 		
 		// 좋아하는 학생 입력 받아서 저장
 		for(int i=0; i<n*n; i++) {
@@ -74,7 +74,7 @@ public class Main {
 			
 			// 학생 번호
 			int student = Integer.parseInt(st.nextToken());
-			order[i] = student;
+//			order[i] = student;
 			// 좋아하는 학생 배열 생성하여 저장
 			int[] like = new int[4];
 			for(int j=0; j<4; j++) {
@@ -87,13 +87,14 @@ public class Main {
 			findSeat(student);
 		}
 		
-		// 자리 출력해보기..
-		for(int i=0; i<n; i++) {
-			for(int j=0; j<n; j++) {
-				System.out.print(map[i][j]+" ");
-			}
-			System.out.println();
-		}
+		
+//		// 자리 출력해보기..
+//		for(int i=0; i<n; i++) {
+//			for(int j=0; j<n; j++) {
+//				System.out.print(map[i][j]+" ");
+//			}
+//			System.out.println();
+//		}
 		
 		int sum = 0;
 		
@@ -114,23 +115,23 @@ public class Main {
 							}
 						}
 					}
-					
-					// 1명-1, 2명-10, 3명-100, 4명-1000
-					switch(cnt) {
-					case 1: 
-						sum+=1;
-						break;
-					case 2:
-						sum+=10;
-						break;
-					case 3:
-						sum+=100;
-						break;
-					case 4: 
-						sum+=1000;
-						break;
-					}
 				}
+				// 1명-1, 2명-10, 3명-100, 4명-1000
+				switch(cnt) {
+				case 1: 
+					sum+=1;
+					break;
+				case 2:
+					sum+=10;
+					break;
+				case 3:
+					sum+=100;
+					break;
+				case 4: 
+					sum+=1000;
+					break;
+				}
+				
 			}
 		}
 		
@@ -184,9 +185,9 @@ public class Main {
 					}
 					return o1.r - o2.r;
 				}
-				return o1.empty - o2.empty;
+				return o2.empty - o1.empty;
 			}
-			return o1.likeFriend - o2.likeFriend;
+			return o2.likeFriend - o1.likeFriend;
 		});
 		
 		// 자리 넣어주기
