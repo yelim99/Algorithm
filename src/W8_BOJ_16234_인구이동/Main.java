@@ -11,13 +11,24 @@ import java.util.StringTokenizer;
 
 public class Main {
 	
+	// 나라의 위치 저장할 클래스
+	static class Location {
+		int r;
+		int c;
+		
+		public Location(int r, int c) {
+			this.r = r;
+			this.c = c;
+		}
+	}
+	
+	
 	static int n, L, R;
 	static int[][] population;
 	static boolean[][] visited;
 	static int[] dr = {-1, 1, 0, 0};
 	static int[] dc = {0, 0, -1, 1};
 	static int sum;
-//	static int days;
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) 인구 이동
@@ -55,8 +66,8 @@ public class Main {
 		boolean check = true;	
 		
 		while(check) {
-			if (move()==0) check = false;
-			else result++;
+			if (move()==0) check = false;	// 연합이 없으면 check false로 바꾸기
+			else result++;	// 연합이 있으면 인구 이동 횟수 증가
 		}
 		
 		System.out.println(result);
@@ -70,10 +81,14 @@ public class Main {
 		
 		for(int i=0; i<n; i++) {
 			for(int j=0; j<n; j++) {
+				
 				// 방문한 적이 없다면 bfs 탐색
 				if (!visited[i][j]) {
 					Queue<Location> queue = new LinkedList<>();
+					
+					// 위치 클래스에 현재 위치 저장
 					Location location = new Location(i, j);
+					
 					// 큐에 현재 나라의 위치 저장
 					queue.add(location);
 					
@@ -106,10 +121,13 @@ public class Main {
 									// 큐와 리스트에 각각 현재 위치 담아주기
 									queue.add(new Location(nr, nc));
 									list.add(new Location(nr, nc));
+									
 									// 방문 표시
 									visited[nr][nc] = true;
+									
 									// 연합 형성되었으니 1 증가
 									cnt++;
+									
 									// 해당 나라 인구 더해주기
 									sum += population[nr][nc];
 								}
@@ -140,19 +158,9 @@ public class Main {
 			}
 		}
 		
-		return cnt;
+		return cnt;	// 연합 개수 반환
 		
 	}
 	
-	// 나라의 위치 저장할 클래스
-	static class Location {
-		int r;
-		int c;
-		
-		public Location(int r, int c) {
-			this.r = r;
-			this.c = c;
-		}
-	}
 
 }

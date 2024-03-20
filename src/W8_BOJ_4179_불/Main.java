@@ -32,6 +32,15 @@ public class Main {
 		 * 가장 빠른 탈출시간 출력
 		 */
 		
+		
+		/* 설계)
+		 * 그냥 지훈이 이동이랑 불 이동 따로따로 bfs만 돌려주려고 했는데,, 안되는거 같아서ㅜㅜ
+		 * 각각 이동 시간을 저장할 2차원 배열을 만들어줌.
+		 * 
+		 * 각각 이동할 때마다 1씩 더해주고,
+		 * 지훈이가 이동할 때 불의 이동보다 빠른지 검사
+		 */
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		
@@ -39,19 +48,21 @@ public class Main {
 		c = Integer.parseInt(st.nextToken());
 		
 		map = new char[r][c];
-		time1 = new int[r][c];
-		time2 = new int[r][c];
+		time1 = new int[r][c];	// 지훈이 이동시간
+		time2 = new int[r][c];	// 불 이동시간
 		
 		for(int i=0; i<r; i++) {
 			String s = br.readLine();
 			for(int j=0; j<c; j++) {
-				map[i][j] = s.charAt(j);
+				map[i][j] = s.charAt(j);	// 지도 값 입력받기
+				
+				// 각 이동시간 -1로 초기화
 				time1[i][j] = -1;
 				time2[i][j] = -1;
 				
 				// 지훈이가 있는 곳 큐에 넣어주고, 시간 0으로 설정
 				if (map[i][j] == 'J') {
-					q1.offer(new int[] {i, j});
+					q1.offer(new int[] {i, j});	
 					time1[i][j] = 0;
 				}
 				// 불이 있는 곳 큐에 넣어주고, 시간 0으로 설정
@@ -62,7 +73,9 @@ public class Main {
 			}
 		}
 		
+		// 불 이동
 		fireBfs();
+		
 		moveBfs();
 		
 //		for(int i=0; i<r; i++) {
@@ -74,10 +87,11 @@ public class Main {
 	
 	}
 	
+	// 불 이동 bfs
 	static void fireBfs() {
 
 		while(!q2.isEmpty()) {
-			int[] cur = q2.poll();
+			int[] cur = q2.poll();	// 현재 불 위치
 			
 			for(int d=0; d<4; d++) {
 				int nr = cur[0]+dr[d];
@@ -85,8 +99,10 @@ public class Main {
 				
 				// 범위 벗어나면 continue
 				if (nr<0 || nr>=r || nc<0 || nc>=c) continue;
+				
 				// 벽이거나, 이미 왔던 곳이면 continue
 				if (map[nr][nc]=='#' || time2[nr][nc]>=0) continue;
+				
 				// 현재 시간에 1 더한 값을 넣어주기
 				time2[nr][nc] = time2[cur[0]][cur[1]]+1;
 				q2.offer(new int[] {nr, nc});
@@ -99,7 +115,7 @@ public class Main {
 	static void moveBfs() {
 		
 		while(!q1.isEmpty()) {
-			int[] cur = q1.poll();
+			int[] cur = q1.poll();	// 현재 지훈이 위치
 			
 			for(int d=0; d<4; d++) {
 				int nr = cur[0]+dr[d];
@@ -116,7 +132,8 @@ public class Main {
 				if (map[nr][nc]=='#' || time1[nr][nc]>=0) {
 					continue;
 				}
-				// 불이 온 시간이 지훈이 이동시간보다 작으면(불이 먼저 왔으면) continue
+				
+				
 				/* time2[nr][nc]!=-1 안넣었을 때 반례
 				    5 5
 					#####
@@ -126,6 +143,8 @@ public class Main {
 					###.#
 				 * 답이 4가 나와야 하는데, IMPOSSIBLE이 나옴
 				 */
+				
+				// 불이 온 시간이 지훈이 이동시간보다 작거나 같으면(불이 먼저 왔으면) continue
 				if (time2[nr][nc]!=-1 && (time2[nr][nc] <= time1[cur[0]][cur[1]]+1)) {
 					continue;
 				}
@@ -135,7 +154,7 @@ public class Main {
 				q1.offer(new int[] {nr, nc});
 			}
 		}
-		// 이동이 불가하다면 impossible 출력
+		// 탈출 못하고 여기까지 오면 이동 불가. impossible 출력
 		System.out.println("IMPOSSIBLE");
 	}
 

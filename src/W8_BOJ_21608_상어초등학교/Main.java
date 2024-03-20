@@ -22,16 +22,29 @@ class Seat {
 		this.empty = empty;
 	}
 	
-	
 }
+
+/*
+3
+4 2 5 1 7
+3 1 9 4 5
+9 8 1 2 3
+8 1 9 3 4
+7 2 3 4 8
+1 9 2 5 7
+6 5 2 3 4
+5 1 9 2 8
+2 9 3 1 4
+ */
 
 public class Main {
 	
 	static int n;
-	static int[][] seat;
+	static int[][] map;
 	static HashMap<Integer, int[]> hash;
 	static int[] dr = {-1, 1, 0, 0};
 	static int[] dc = {0, 0, -1, 1};
+	static int[] order;	// 순서
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) 상어초등학교
@@ -51,14 +64,18 @@ public class Main {
 		
 		n = Integer.parseInt(st.nextToken());
 		
-		seat = new int[n][n];
+		map = new int[n][n];
 		hash = new HashMap<>();
+		order = new int[n*n];
 		
 		// 좋아하는 학생 입력 받아서 저장
 		for(int i=0; i<n*n; i++) {
 			st = new StringTokenizer(br.readLine());
 			
+			// 학생 번호
 			int student = Integer.parseInt(st.nextToken());
+			order[i] = student;
+			// 좋아하는 학생 배열 생성하여 저장
 			int[] like = new int[4];
 			for(int j=0; j<4; j++) {
 				like[j] = Integer.parseInt(st.nextToken());
@@ -66,13 +83,14 @@ public class Main {
 			// 좋아하는 친구 hash에 저장
 			hash.put(student, like);
 			
-			// 자리 앉기
+			// 자리 찾기
 			findSeat(student);
 		}
 		
+		// 자리 출력해보기..
 		for(int i=0; i<n; i++) {
 			for(int j=0; j<n; j++) {
-				System.out.print(seat[i][j]+" ");
+				System.out.print(map[i][j]+" ");
 			}
 			System.out.println();
 		}
@@ -84,14 +102,14 @@ public class Main {
 		for(int i=0; i<n; i++) {
 			for(int j=0; j<n; j++) {
 				int cnt = 0;
-				int[] friends = hash.get(seat[i][j]);
+				int[] friends = hash.get(map[i][j]);
 				for(int d=0; d<4; d++) {
 					int nr = i+dr[d];
 					int nc = j+dc[d];
 					
 					if (nr>=0 && nr<n && nc>=0 && nc<n) {
 						for(int x=0; x<4; x++) {
-							if (seat[nr][nc] == friends[x]) {
+							if (map[nr][nc] == friends[x]) {
 								cnt++;
 							}
 						}
@@ -127,11 +145,13 @@ public class Main {
 		// 정렬을 해주기 위해 리스트에 저장
 		List<Seat> seats = new ArrayList<>();
 		
+		
 		for(int i=0; i<n; i++) {
 			for(int j=0; j<n; j++) {
 				
 				int likeCnt = 0;
 				int emptyCnt = 0;
+				
 				for (int d=0; d<4; d++) {
 					int nr = i+dr[d];
 					int nc = j+dc[d];
@@ -139,13 +159,13 @@ public class Main {
 					if (nr>=0 && nr<n && nc>=0 && nc<n) {
 						// 자리에 좋아하는 학생이 있는지
 						for (int x=0; x<4; x++) {
-							if (seat[nr][nc] == friends[x]) {
+							if (map[nr][nc] == friends[x]) {
 								likeCnt++;
 							}
 						}
 						
 						// 빈칸인지 확인
-						if (seat[nr][nc] == 0) {
+						if (map[nr][nc] == 0) {
 							emptyCnt++;
 						}
 					}
@@ -171,11 +191,12 @@ public class Main {
 		
 		// 자리 넣어주기
 		for(Seat s : seats) {
-			if (seat[s.r][s.c] == 0) {
-				seat[s.r][s.c] = student;
+			if (map[s.r][s.c] == 0) {
+				map[s.r][s.c] = student;
 				return;
 			}
 		}
+		
 		
 	}
 	
