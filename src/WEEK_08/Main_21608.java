@@ -1,4 +1,4 @@
-package W8_BOJ_21608_상어초등학교;
+package WEEK_08;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,7 +37,7 @@ class Seat {
 2 9 3 1 4
  */
 
-public class Main {
+public class Main_21608 {
 	
 	static int n;
 	static int[][] map;

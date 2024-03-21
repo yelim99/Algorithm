@@ -1,4 +1,4 @@
-package W8_BOJ_16234_인구이동;
+package WEEK_08;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_16234 {
 	
 	// 나라의 위치 저장할 클래스
 	static class Location {

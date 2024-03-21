@@ -1,4 +1,4 @@
-package W8_BOJ_2573_빙산;
+package WEEK_08;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_2573 {
 	
 	static int n, m;
 	static int[][] graph;

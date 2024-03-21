@@ -1,4 +1,4 @@
-package W8_BOJ_4179_불;
+package WEEK_08;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_4179 {
 	
 	static int r, c;
 	static char[][] map;

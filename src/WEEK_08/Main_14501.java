@@ -1,11 +1,11 @@
-package W8_BOJ_14501_퇴사;
+package WEEK_08;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_14501 {
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) 퇴사
