@@ -1,8 +1,13 @@
 package W9_BOJ_20055_컨베이어벨트;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		/* 문제) 컨베이어 벨트 위의 로봇
 		 * 로봇을 올리는 위치에 올리거나 로봇이 어떤 칸으로 이동하면 그 칸의 내구도는 즉시 1만큼 감소한다.
 		 * 
@@ -26,7 +31,28 @@ public class Main {
 		 * 4. 2N의 내구성 1이상이면 로봇 올리기
 		 * 5. 내구성 0인 칸이 k개 이상인지 확인
 		 */
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		int n = Integer.parseInt(st.nextToken());
+		int k = Integer.parseInt(st.nextToken());
+		
+		int[] durability = new int[n*2];
+		
+		int point = 0;
+		// 처음 로봇 올리고 내구성 1 감소
+		durability[0] -= 1;
+		
+		int cnt = 0;
+		
+		if(durability[0]==1) cnt = 1;
+		
+		while(cnt < k) {
+			// 컨베이어벨트 회전
+			
+		}
 
 	}
-
+ 
 }
