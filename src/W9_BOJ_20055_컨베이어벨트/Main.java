@@ -20,16 +20,6 @@ public class Main {
 		 * 종료되었을 때 몇 번째 단계가 진행 중이었는지 구하기
 		 * 
 		 * n = 컨베이어벨트 길이 / k = 내구도가 0인 칸의 최대 개수
-		 * 
-		 */
-		
-		/* 설계)
-		 * 모듈러 % ? 원처럼 벨트가 돌아가야하니까! 1 다음에는 2N이 올리는 위치가 됨.
-		 * 1. 로봇을 1번에 올려? 1번 내구성 1 감소
-		 * 2. 벨트, 로봇 한 칸 이동
-		 * 3. 로봇 오른쪽으로 한 칸 이동할 수 있으면 이동, 내구성 1 감소
-		 * 4. 2N의 내구성 1이상이면 로봇 올리기
-		 * 5. 내구성 0인 칸이 k개 이상인지 확인
 		 */
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -37,22 +27,73 @@ public class Main {
 		
 		int n = Integer.parseInt(st.nextToken());
 		int k = Integer.parseInt(st.nextToken());
+		st = new StringTokenizer(br.readLine());
 		
-		int[] durability = new int[n*2];
+		int[] belt = new int[2*n];
 		
-		int point = 0;
-		// 처음 로봇 올리고 내구성 1 감소
-		durability[0] -= 1;
-		
-		int cnt = 0;
-		
-		if(durability[0]==1) cnt = 1;
-		
-		while(cnt < k) {
-			// 컨베이어벨트 회전
-			
+		for(int i=0; i<2*n; i++) {
+			belt[i] = Integer.parseInt(st.nextToken());
 		}
-
+		
+		boolean[] robot = new boolean[n];
+		
+		int level = 1;
+		
+		while(true) {
+			// 1. 벨트+로봇 회전
+			int tmp = belt[2*n-1];
+			for(int i=2*n-1; i>0; i--) {
+				belt[i] = belt[i-1];
+			}
+			belt[0] = tmp;
+			
+			for(int i=n-1; i>0; i--) {
+				robot[i] = robot[i-1];
+			}
+			robot[0] = false;
+			
+			// 내리는 위치에 로봇이 있으면 false
+			if(robot[n-1]) {
+				robot[n-1] = false;
+			}
+			
+			
+			// 2. 먼저 벨트에 올라간 로봇부터 이동 가능하다면 이동하기
+			// 이동하려는 칸에 로봇 없고, 내구성 1 이상
+			for(int i=n-2; i>=0; i--) {
+				if (robot[i] && !robot[i+1] && belt[i+1]>=1) {
+					belt[i+1]--;
+					robot[i] = false;
+					robot[i+1] = true;
+				}
+			}
+			
+			// 내리는 위치에 로봇이 있으면 false
+			if(robot[n-1]) {
+				robot[n-1] = false;
+			}
+			
+			// 3. 올리는 위치에 있는 칸의 내구성이 1이상이면 로봇 올리기
+			if (belt[0] >= 1) {
+				robot[0] = true;
+				belt[0]--;
+			}
+			
+			// 4. 내구도가 0인 칸의 개수가 k개 이상이면 종료
+			int cnt = 0;
+			for(int i=0; i<2*n; i++) {
+				if (belt[i]==0) {
+					cnt++;
+				}
+			}
+			
+			if (cnt >= k) {
+				System.out.println(level);
+				break;
+			}
+			
+			level++;
+		}
 	}
  
 }
