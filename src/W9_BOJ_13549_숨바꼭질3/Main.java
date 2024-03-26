@@ -24,6 +24,7 @@ public class Main {
 		
 		/* 반례)
 		 * 4 6 => 1 나와야 함
+		 * 4-3-6
 		 * 45%?? 에서 틀림
 		 */
 		
@@ -57,15 +58,17 @@ public class Main {
 				visited[cur.loc*2] = true;
 			}
 			
+			// 순서... 아래 +1과 순서 바꾸니ㅣ까 반례 맞음..
+			if (cur.loc-1 >= 0 && !visited[cur.loc-1]) {
+				q.offer(new Loc(cur.loc-1, cur.time+1));
+				visited[cur.loc-1] = true;
+			}
+			
 			if (cur.loc+1 <= 100000 && !visited[cur.loc+1]) {
 				q.offer(new Loc(cur.loc+1, cur.time+1));
 				visited[cur.loc+1] = true;
 			}
 			
-			if (cur.loc-1 >= 0 && !visited[cur.loc-1]) {
-				q.offer(new Loc(cur.loc-1, cur.time+1));
-				visited[cur.loc-1] = true;
-			}
 			
 		}
 		
