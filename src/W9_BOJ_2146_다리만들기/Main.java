@@ -15,14 +15,13 @@ public class Main {
 	static boolean[][] Qvisited;
 	static int[] dr = {-1, 1, 0, 0};
 	static int[] dc = {0, 0, -1, 1};
-	static int num = 1;
 	static int cnt;
 	static int ans;
 	static int min = Integer.MAX_VALUE;
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) 다리 만들기
-		 * 
+		 * 지도가 주어질 때, 가장 짧은 다리 하나를 놓아 두 대륙을 연결하는 방법을 찾으시오.
 		 */
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -41,48 +40,40 @@ public class Main {
 			}
 		}
 		
-		
+		// 1씩 증가시키면서 dfs 돌아서 구역 나눠주기
+		int num = 1;
 		for(int i=0; i<n; i++) {
 			for(int j=0; j<n; j++) {
-				if (!visited[i][j] && map[i][j]==1) {
-					search(i, j);
+				if (!visited[i][j] && map[i][j]!=0) {
+					dfs(i, j, num);
 					num++;
-					visited = new boolean[n][n];
 				}
 			}
 		}
 		
-
-		for(int i=0; i<n; i++) {
-			for(int j=0; j<n; j++) {
-				System.out.print(map[i][j]+" ");
-			}
-			System.out.println();
+		// 구역 개수만큼 bfs 호출
+		for(int i=1; i<=num; i++) {
+			bfs(i);
 		}
-
-		System.out.println(ans);
+		
+		System.out.println(min);
 		
 	}
 	
-	static void search(int r, int c) {
+	// 구역 나눠주는 dfs 메소드
+	static void dfs(int r, int c, int num) {
 		visited[r][c] = true;
-		map[r][c] = 2;
+		map[r][c] = num;	// 현재 구역의 값들을 num으로 설정해주기
 		
 		for(int d=0; d<4; d++) {
 			int nr = r+dr[d];
 			int nc = c+dc[d];
 			
+			// 범위 내에 있고
 			if (nr>=0 && nr<n && nc>=0 && nc<n) {
-				if (!visited[nr][nc] && map[nr][nc]==1) {
-					map[nr][nc] = 2;
-					visited[nr][nc] = true;
-					search(nr, nc);
-				}
-				else if (map[nr][nc]==0) {
-					// 여기서 bfs??
-//					ans = bfs(r, c);
-//					map[r][c] = 1;
-					ans = bfs(r, c);
+				// 방문한 적 없고, 0이 아니라면(육지라면)
+				if (!visited[nr][nc] && map[nr][nc]!=0) {
+					dfs(nr, nc, num);
 				}
 			}
 		}
@@ -91,16 +82,21 @@ public class Main {
 	}
 	
 
-	
-	static int bfs(int r, int c) {
+	// 최단 길이의 다리 놓는 bfs 
+	static void bfs(int num) {
 		Queue<int[]> q = new LinkedList<>();
-//		visited = new boolean[n][n];
+		// 큐에서 쓸 visited 초기화
+		Qvisited = new boolean[n][n];
 		
-		// 하나씩 최소,,, 구하기?? 초기화하면서??
-		
-		int length = 0;
-		
-		q.offer(new int[] {r, c, length});
+		// 넘겨준 num값과 같다면 해당 구역의 정보 큐에 저장해주기
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<n; j++) {
+				if (map[i][j] == num) {
+					q.offer(new int[] {i, j, 0});
+					Qvisited[i][j] = true;
+				}
+			}
+		}
 		
 		while (!q.isEmpty()) {
 			int[] cur = q.poll();
@@ -109,26 +105,24 @@ public class Main {
 				int nr = cur[0]+dr[d];
 				int nc = cur[1]+dc[d];
 				
+				// 범위 확인
 				if (nr>=0 && nr<n && nc>=0 && nc<n) {
-					if (!visited[nr][nc] && map[nr][nc]==0) {
-						length++;
-						map[nr][nc] = 7;
-						q.add(new int[] {nr, nc, length});
-						visited[nr][nc] = true;
+					// 다른 섬에 도달했을 경우 cnt와 최소값 비교하여 최소값 저장
+					if (map[nr][nc]!=0 && map[nr][nc]!=num) {
+						if (cur[2]!=0) {
+							min = Math.min(min, cur[2]);
+						}
 					}
-//					System.out.println(num+1);
-					if (map[nr][nc]==2) {
-//						System.out.println(99);
-						cnt++;
-//						min = Math.min(min, cnt);
-						return cur[2];
+					else {
+						// 이동한 곳이 방문하지 않았고, 0인 곳이라면 큐에 추가
+						if (!Qvisited[nr][nc] && map[nr][nc]==0) {
+							q.add(new int[] {nr, nc, cur[2]+1});
+							Qvisited[nr][nc] = true;
+						}
 					}
 				}
 			}
 		}
-		return length;
-		// 왜자꾸 0이 나오지
-		
 	}
 
 }
