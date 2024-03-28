@@ -24,6 +24,13 @@ public class Main {
 		 * 지도가 주어질 때, 가장 짧은 다리 하나를 놓아 두 대륙을 연결하는 방법을 찾으시오.
 		 */
 		
+		/* 설계)
+		 * dfs 돌면서 구역마다 숫자를 다르게 설정하여 구역 나눠주기
+		 * 구역 별로 bfs 돌기
+		 * 해당 구역의 숫자이면 큐에 넣어주고, 탐색하며 0(바다)이면 위치와 다리 길이 1 증가시켜 큐에 저장
+		 * 해당 구역 숫자가 아닌 곳을 만나면(다른 구역) 최소값 비교
+		 */
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		

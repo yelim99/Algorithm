@@ -29,6 +29,14 @@ public class Main {
 		 * 벽을 3개 세운 뒤, 바이러스가 퍼질 수 없는 곳을 안전 영역이라고 한다. 
 		 * 연구소의 지도가 주어졌을 때 얻을 수 있는 안전 영역 크기의 최댓값을 구하는 프로그램을 작성하시오.
 		 */
+		
+		/* 설계)
+		 * dfs 돌면서 벽 설치해주기
+		 * 벽 3개 설치하면 bfs 호출
+		 * 카피한 map에 바이러스 확산 표시
+		 * bfs 돌고나서, 0인 개수 세줘서 안전영역 개수 구하기
+		 * 최대값 갱신!
+		 */
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
@@ -46,6 +54,7 @@ public class Main {
 			}
 		}
 		
+		// 벽 세우는 dfs 호출
 		wallDfs(0);
 		
 		System.out.println(safeMax);
@@ -88,7 +97,7 @@ public class Main {
 			}
 		}
 		
-		// 주형 says "동시성문제" 피하기 위한 배열 복사
+		// "동시성문제"(feat.주형) 피하기 위한 배열 복사
 		copyMap = new int[n][m];
 		for(int i=0; i<n; i++) {
 			copyMap[i] = map[i].clone();
@@ -104,6 +113,7 @@ public class Main {
 				
 				if (nr>=0 && nr<n && nc>=0 && nc<m) {
 					if (!visited[nr][nc] && copyMap[nr][nc]==0) {
+						// 바이러스 확산!
 						// 복사 배열의 [nr][nc]에 2 넣어주기
 						copyMap[nr][nc] = 2;
 						// 큐에 값 저장
@@ -120,7 +130,7 @@ public class Main {
 		for(int i=0; i<n; i++) {
 			for(int j=0; j<m; j++) {
 				
-				// 복사 배열의 값이 0이면 영역 개수 1 증가
+				// 복사 배열의 값이 0이면 안전영역 개수 1 증가
 				if (copyMap[i][j]==0) {
 					safe++;
 				}

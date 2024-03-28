@@ -3,20 +3,20 @@ package W9_BOJ_1941_소문난칠공주;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class Main {
+public class Main2 {
 	
 	static char[][] arr;
 	static boolean[][] visited;
-	static int[] selectR;
-	static int[] selectC;
+	static List<char[]> select = new ArrayList<>();
 	static char[] sel;
 	static int[] dr = {-1, 1, 0, 0};
 	static int[] dc = {0, 0, -1, 1};
-	static int ans;
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) 소문난 칠공주
@@ -34,8 +34,6 @@ public class Main {
 		
 		arr = new char[5][5];
 		visited = new boolean[5][5];
-		selectR = new int[5];
-		selectC = new int[5];
 		sel = new char[7];
 		
 		for(int i=0; i<5; i++) {
@@ -45,81 +43,79 @@ public class Main {
 			}
 		}
 		
-		comb(0, 0);
-		System.out.println(ans);
+		int cnt = 0;
+		int ans = 0;
 		
-
-	}	// main 끝
-	
-	// 조합 메소드
-	static void comb(int depth, int start) {
-		if (depth==7) {
-			// 자리 연결되어있는지 확인하는 bfs
-			if (bfs()) ans++;
-		}
 		
-		for(int i=start; i<25; i++) {
-			visited[i/5][i%5] = true;
-			comb(depth+1, i+1);
-			visited[i/5][i%5] = false;
-		}
-	}
-	
-	
-	// 자리 연결되었는지 확인하는 bfs
-	static boolean bfs() {
-		boolean[][] Qvisited = new boolean[5][5];
-		
-		// 방문배열 복사
-		for(int i=0; i<5; i++) {
-			Qvisited[i] = visited[i].clone();
-		}
-		
-		Queue<int[]> q = new LinkedList<>();
-		
-		int r = 0;
-		int c = 0;
+		Set<char[]> set = new HashSet<char[]>();
 		
 		for(int i=0; i<5; i++) {
 			for(int j=0; j<5; j++) {
-				if(Qvisited[i][j]) {
-					r = i;
-					c = j;
-				}
-			}
-		}
-		
-		q.add(new int[] {r, c});
-		
-		int cnt = 0;
-		int cntS = 0;
-		
-		while(!q.isEmpty()) {
-			int[] cur = q.poll();
-			
-			for(int d=0; d<4; d++) {
-				int nr = cur[0]+dr[d];
-				int nc = cur[1]+dc[d];
-				
-				if (nr>=0 && nr<5 && nc>=0 && nc<5) {
+				if (arr[i][j] == 'S') {
+					sel[0] = arr[i][j];
+					comb(i, j, 1);
+					cnt = 1;
 					
-					if(Qvisited[nr][nc]) {
-						if (arr[nr][nc] == 'S') {
-							cntS++;
+					System.out.println(Arrays.toString(sel));
+					set.add(sel);
+					select.add(sel);
+//					System.out.println(select.size());
+					
+//					list = new ArrayList<>(set);
+//					for(int k=0; k<list.size(); k++) {
+//						if (list.get(k)'S') {
+//							
+//						}
+//					}
+					System.out.println("---------------");
+					for(int k=0; k<7; k++) {
+						if (sel[k] == 'S') {
+							cnt++;
 						}
+					}
+					if (cnt>=4) {
+//						System.out.println(select.size());
+//						set.addAll(select);
 						
-						cnt++;
-						Qvisited[nr][nc] = false;
-						q.add(new int[] {nr, nc});
 					}
 				}
+//				System.out.println(list.size());
+				
 			}
 		}
 		
-		if (cnt==7 && cntS >= 4) {
-			return true;
+		List<char[]> list = new ArrayList<>(set);
+		
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(Arrays.toString(list.get(i)));
 		}
-		return false;
+		System.out.println(list.size());
+		
+		
+//		for(int i=0; i<5; i++) {
+//			for(int j=0; j<5; j++) {
+//				System.out.print(arr[i][j]+" ");
+//			}
+//			System.out.println();
+//		}
+
+	}
+	
+	
+	static void comb(int r, int c, int idx) {
+		if (idx==7) {
+			return;
+		}
+		
+		for(int d=0; d<4; d++) {
+			 int nr = r+dr[d];
+			 int nc = c+dc[d];
+			 
+			 if (nr>=0 && nr<5 && nc>=0 && nc<5) {
+				 sel[idx] = arr[nr][nc];
+				 comb(nr, nc, idx+1);
+			 }
+		}
 	}
 
 }

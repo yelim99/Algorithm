@@ -29,27 +29,35 @@ public class Main {
 		int k = Integer.parseInt(st.nextToken());
 		st = new StringTokenizer(br.readLine());
 		
+		// 컨베이어벨트 배열
 		int[] belt = new int[2*n];
 		
+		// 벨트에 내구도 입력받기
 		for(int i=0; i<2*n; i++) {
 			belt[i] = Integer.parseInt(st.nextToken());
 		}
 		
+		// 해당 칸에 로봇이 있는지 없는지 체크 할 배열
 		boolean[] robot = new boolean[n];
 		
+		// 단계 1로 초기화
 		int level = 1;
 		
+		// 
 		while(true) {
 			// 1. 벨트+로봇 회전
+			// 옆으로 한 칸씩 옮겨주기 (거꾸로!)
 			int tmp = belt[2*n-1];
 			for(int i=2*n-1; i>0; i--) {
 				belt[i] = belt[i-1];
 			}
 			belt[0] = tmp;
 			
+			// 로봇도 한 칸씩 옮겨주기
 			for(int i=n-1; i>0; i--) {
 				robot[i] = robot[i-1];
 			}
+			// 옮기면 0에는 있을 수 없음.
 			robot[0] = false;
 			
 			// 내리는 위치에 로봇이 있으면 false
@@ -62,7 +70,8 @@ public class Main {
 			// 이동하려는 칸에 로봇 없고, 내구성 1 이상
 			for(int i=n-2; i>=0; i--) {
 				if (robot[i] && !robot[i+1] && belt[i+1]>=1) {
-					belt[i+1]--;
+					belt[i+1]--;	// 해당 칸 내구성 1 감소
+					// 로봇 위치 체크
 					robot[i] = false;
 					robot[i+1] = true;
 				}
@@ -75,23 +84,27 @@ public class Main {
 			
 			// 3. 올리는 위치에 있는 칸의 내구성이 1이상이면 로봇 올리기
 			if (belt[0] >= 1) {
-				robot[0] = true;
-				belt[0]--;
+				robot[0] = true;	// 위치 체크
+				belt[0]--;	// 내구성 1 감소
 			}
 			
 			// 4. 내구도가 0인 칸의 개수가 k개 이상이면 종료
 			int cnt = 0;
 			for(int i=0; i<2*n; i++) {
+				// 내구도 0이면 카운트 증가
 				if (belt[i]==0) {
 					cnt++;
 				}
 			}
 			
+			// 내구도가 0인 개수가 k개 이상이면
 			if (cnt >= k) {
+				// 현재 단계 출력
 				System.out.println(level);
 				break;
 			}
 			
+			// 단계 1 증가
 			level++;
 		}
 	}
