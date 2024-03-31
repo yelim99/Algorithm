@@ -1,4 +1,4 @@
-package W9_BOJ_14502_연구소;
+package WEEK_09;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_14502 {
 	
 	static int n, m;
 	static int[][] map;

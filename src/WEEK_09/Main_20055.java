@@ -1,11 +1,11 @@
-package W9_BOJ_20055_컨베이어벨트;
+package WEEK_09;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_20055 {
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) 컨베이어 벨트 위의 로봇

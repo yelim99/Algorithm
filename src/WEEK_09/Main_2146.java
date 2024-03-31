@@ -1,4 +1,4 @@
-package W9_BOJ_2146_다리만들기;
+package WEEK_09;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_2146 {
 	
 	static int n;
 	static int[][] map;

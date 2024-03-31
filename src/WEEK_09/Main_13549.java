@@ -1,4 +1,4 @@
-package W9_BOJ_13549_숨바꼭질3;
+package WEEK_09;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_13549 {
 	
 	static int n, k;
 	static boolean[] visited;
@@ -55,6 +55,7 @@ public class Main {
 			// 동생 만났으면 최소값 비교해서 구해주기
 			if (cur.loc == k) {
 				min = Math.min(min, cur.time);
+				break;
 			}
 			
 			// 순간이동 할 경우

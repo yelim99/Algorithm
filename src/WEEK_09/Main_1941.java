@@ -1,4 +1,4 @@
-package W9_BOJ_1941_소문난칠공주;
+package WEEK_09;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Main {
+public class Main_1941 {
 	
 	static char[][] arr;
 	static boolean[][] visited;

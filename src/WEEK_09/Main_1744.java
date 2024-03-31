@@ -1,4 +1,4 @@
-package W9_BOJ_1744_수묶기;
+package WEEK_09;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class Main {
+public class Main_1744 {
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		/* 문제) 수 묶기

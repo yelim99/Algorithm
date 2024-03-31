@@ -1,4 +1,4 @@
-package W9_BOJ_16236_아기상어;
+package WEEK_09;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 
-public class Main {
+public class Main_16236 {
 	
 	static int n;
 	static int[][] map;
