@@ -41,6 +41,7 @@ public class Main {
 		 */
 		
 		/* 설계)
+		 * 다익스트라
 		 * 두 정점을 무조건 지나야 함..
 		 * 그럼 두 가지 경우를 고려해주면 된다. 1-v1-v2-v 이거나 1-v2-v1-v 이거나.
 		 * 그럼 1번 정점을 시작으로 v1까지의 최단경로, v2까지의 최단경로를 각각 저장해주고
@@ -104,26 +105,34 @@ public class Main {
 		first += dist[v-1];
 		second += dist[v1];
 		
+		// inf보다 크다면(경로가 없다면) -1 출력
 		if (first>=inf || second>=inf) {
 			System.out.println(-1);
-		} else {
+		} 
+		// 아니면 쵝소값 비교하여 출력
+		else {
 			long min = Math.min(first, second);
 			System.out.println(min);
 		}
 
 	}
 	
+	// 다익스트라
 	static void dijkstra(int start) {
 		PriorityQueue<Node2> pq = new PriorityQueue<>();
 		
+		// 처음 시작지점은 거리 0으로 초기화
 		dist[start] = 0;
+		// 큐에 넣어주기
 		pq.add(new Node2(start, 0));
 		
 		while(!pq.isEmpty()) {
 			Node2 cur = pq.poll();
 			
+			// 거리가 현재 정점까지의 거리보다 크다면 탐색 중지
 			if (dist[cur.end]<cur.w) continue;
 			
+			// 저장된 거리와 현재까지의 거리+다음 거리 비교하여 갱신
 			for(Node2 node : list[cur.end]) {
 				if(dist[node.end]>dist[cur.end]+node.w) {
 					dist[node.end] = dist[cur.end]+node.w; 

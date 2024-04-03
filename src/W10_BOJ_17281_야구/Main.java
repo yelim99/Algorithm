@@ -54,6 +54,7 @@ public class Main {
 	
 	// 타순 정하는 순열
 	static void perm(int cnt) {
+		// 10명 다 했으면 시작
 		if (cnt==10) {
 			// 게임 시작
 			game();
@@ -63,6 +64,7 @@ public class Main {
 		for(int i=1; i<=9; i++) {
 			if (!visited[i]) {
 				visited[i] = true;
+				// 순서 배열에 넣어주기
 				order[i] = cnt;
 				perm(cnt+1);
 				visited[i] = false;
@@ -135,17 +137,5 @@ public class Main {
 		max = Math.max(max, score);
 	}
 	
-	static void move(int[] base, int n) {
-		for(int i=0; i<n; i++) {
-			base[4] += base[3];
-			base[3] += base[2];
-			base[2] += base[1];
-			base[1] = 0;
-		}
-		
-		// 새로 공 친 타자 위치 저장
-		base[n]++;
-		
-	}
 
 }
