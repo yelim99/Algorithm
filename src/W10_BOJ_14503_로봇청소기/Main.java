@@ -62,6 +62,7 @@ public class Main {
 
 	}
 	
+	// 청소 메소드
 	static void clean(int r, int c, int d) {
 		
 		// 현재 칸 청소 (무조건 빈 칸)

@@ -42,7 +42,7 @@ public class Main {
 		
 		/* 설계)
 		 * 다익스트라
-		 * 두 정점을 무조건 지나야 함..
+		 * 두 정점을 무조건 지나야 함.
 		 * 그럼 두 가지 경우를 고려해주면 된다. 1-v1-v2-v 이거나 1-v2-v1-v 이거나.
 		 * 그럼 1번 정점을 시작으로 v1까지의 최단경로, v2까지의 최단경로를 각각 저장해주고
 		 * 그 다음은 v1-v2까지 경로, v1-v까지의 경로,
@@ -57,15 +57,17 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		
-		v = Integer.parseInt(st.nextToken());
-		e = Integer.parseInt(st.nextToken());
+		v = Integer.parseInt(st.nextToken());	// 정점 수
+		e = Integer.parseInt(st.nextToken());	// 간선 수
 		
+		// 인접리스트 초기화
 		list = new ArrayList[v];
 		
 		for(int i=0; i<v; i++) {
 			list[i] = new ArrayList<>();
 		}
 		
+		// 간선 정보 입력받기
 		for(int i=0; i<e; i++) {
 			st = new StringTokenizer(br.readLine());
 			int a = Integer.parseInt(st.nextToken())-1;
@@ -77,12 +79,14 @@ public class Main {
 			list[b].add(new Node2(a, c));
 		}
 		
+		// 거쳐야 하는 두 정점 입력받기 (인덱스 맞추기 위해 1 빼줌)
 		st = new StringTokenizer(br.readLine());
 		v1 = Integer.parseInt(st.nextToken())-1;
 		v2 = Integer.parseInt(st.nextToken())-1;
 		
-		
+		// 각 정점의 최단 거리 저장할 배열
 		dist = new int[v];
+		
 		long first = 0;
 		long second = 0;
 		
