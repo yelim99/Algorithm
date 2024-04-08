@@ -17,7 +17,7 @@ public class Main {
 	static int sum;
 
 	public static void main(String[] args) throws IOException {
-		/* 문제)
+		/* 문제) 주사위 굴리기2
 		 * 
 		 */
 		
