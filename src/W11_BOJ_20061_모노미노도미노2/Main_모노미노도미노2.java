@@ -165,12 +165,16 @@ public class Main_모노미노도미노2 {
 				}
 			}
 			
-			
-			System.out.println(green[1][c]);
+			// 여기서 왜... isOk 찍어봐도 3 잘나오는데..
+			// 왜 green[1][c]가 0이었다가 
+			// green[isOk-1][c]=1 만 하면 green[2][c]랑 같이 1이 될까..?
+			// 짜증나네 ㅠ
+			System.out.println(green[1][c]+" / "+green[2][c]);
+			System.out.println(green[isOk-1][c]);
 			
 			green[isOk-1][c] = 1;
-			System.out.println(isOk);
-			System .out.println(green[1][c]);
+			
+			System .out.println(green[1][c]+" / "+green[2][c]);
 			
 			green[isOk][c] = 1;
 			
