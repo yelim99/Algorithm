@@ -1,4 +1,4 @@
-package W11_BOJ_15683_감시;
+package WEEK_11;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_15683_감시 {
 	
 	static class CCTV {
 		int r;

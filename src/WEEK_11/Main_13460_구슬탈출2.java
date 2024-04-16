@@ -1,4 +1,4 @@
-package W11_BOJ_13460_구슬탈출2;
+package WEEK_11;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_13460_구슬탈출2 {
 	
 	static int n, m;
 	static char[][] board;

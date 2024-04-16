@@ -1,4 +1,4 @@
-package W11_BOJ_20061_모노미노도미노2;
+package WEEK_11;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 
-public class Main_모노미노도미노2 {
+public class Main_20061_모노미노도미노2 {
 	
 	static int n;
 	static int[][] info;

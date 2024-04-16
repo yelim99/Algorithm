@@ -1,4 +1,4 @@
-package W11_BOJ_23288_주사위굴리기2;
+package WEEK_11;
  
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main_주사위굴리기2 {
+public class Main_23288_주사위굴리기2 {
 	
 	static int n, m, k;
 	static int[][] map;
