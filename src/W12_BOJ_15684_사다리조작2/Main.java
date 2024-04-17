@@ -32,10 +32,12 @@ public class Main {
 			ladder[a][b] = 1;
 		}
 		
+		// 3보다 크면 -1이니까 4번까지만 돌려보기
 		for(int i=0; i<=3; i++) {
 			dfs(1, 0, i);
 		}
 		
+		// answer이 그대로 max값이면 불가능이므로 -1 출력
 		if (answer==Integer.MAX_VALUE) {
 			answer = -1;
 		}
@@ -44,6 +46,7 @@ public class Main {
 	}
 	
 	static void dfs(int r, int cnt, int size) {
+		// 첫 번째 하나 추가, 두 번째 두 개 추가 ..
 		if (cnt == size) {
 			if (go()) {
 				answer = Math.min(answer, size);
@@ -51,35 +54,49 @@ public class Main {
 			return;
 		}
 		
+		// 반복
 		for(int i=r; i<=h; i++) {
 			for(int j=1; j<n; j++) {
+				// 연속하거나 접하면 continue
 				if (ladder[i][j]==1 || ladder[i][j-1]==1 || ladder[i][j+1]==1) {
 					continue;
 				}
+				// 아니면 선 그어주기
 				ladder[i][j] = 1;
+				// dfs 호출
 				dfs(i, cnt+1, size);
+				// 초기화
 				ladder[i][j] = 0;
 			}
 		}
 	}
 	
+	// 사다리 타기
 	static boolean go() {
 		for(int i=1; i<=n; i++) {
+			// 현재 위치(세로선)
 			int cur = i;
+			// 시작 행
 			int s = 1;
+			
+			// 마지막행까지
 			while(s <= h) {
+				// 가로선이 오른쪽으로 있으면
 				if (ladder[s][cur] == 1) {
-					cur++;
-					s++;
+					cur++;	// 현재 위치 오른쪽으로 이동
+					s++;	// 행 하나 아래로
 				}
+				// 가로선이 왼쪽으로 있으면
 				else if (ladder[s][cur-1] == 1) {
-					cur--;
-					s++;
+					cur--;	// 현재 위치 왼쪽으로 이동
+					s++;	// 행 하나 아래로
 				}
+				// 가로선이 없으면
 				else {
-					s++;
+					s++;	// 행만 하나 아래로 이동
 				}
 			}
+			// 시작한 세로 선과 현재 위치의 세로 선이 다르면 fasle
 			if (i != cur) return false;
 		}
 		return true;
