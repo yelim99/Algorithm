@@ -7,13 +7,14 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-	static int n, m, h;	// 세로선, 가로선, 가로선 개수
+	static int n, m, h;	// 세로선, (중간)가로선, 가로선 개수
 	static int[][] ladder;
 	static int answer = Integer.MAX_VALUE;
 	
 	public static void main(String[] args) throws IOException {
 		/* 문제) 15684_사다리조작
-		 * 
+		 * i 세로선의 결과가 i번이 나오도록 하기 위해 추가해야 할 가로선 개수의 최소값
+		 * 3 이상이거나 불가능하면 -1 출력
 		 */
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -32,7 +33,7 @@ public class Main {
 			ladder[a][b] = 1;
 		}
 		
-		// 3보다 크면 -1이니까 4번까지만 돌려보기
+		// 3보다 크면 -1이니까
 		for(int i=0; i<=3; i++) {
 			dfs(1, 0, i);
 		}
@@ -46,7 +47,6 @@ public class Main {
 	}
 	
 	static void dfs(int r, int cnt, int size) {
-		// 첫 번째 하나 추가, 두 번째 두 개 추가 ..
 		if (cnt == size) {
 			if (go()) {
 				answer = Math.min(answer, size);
