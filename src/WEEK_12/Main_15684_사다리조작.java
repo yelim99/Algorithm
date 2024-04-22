@@ -1,11 +1,11 @@
-package W12_BOJ_15684_사다리조작2;
+package WEEK_12;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_15684_사다리조작 {
 
 	static int n, m, h;	// 세로선, (중간)가로선, 가로선 개수
 	static int[][] ladder;

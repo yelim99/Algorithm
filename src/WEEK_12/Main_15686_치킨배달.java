@@ -1,4 +1,4 @@
-package W12_BOJ_15686_치킨배달;
+package WEEK_12;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_15686_치킨배달 {
 	
 	static class House {
 		int r, c;

@@ -1,4 +1,4 @@
-package W12_BOJ_9251_LCS;
+package WEEK_12;
 
 import java.io.BufferedReader;
 import java.io.IOException;

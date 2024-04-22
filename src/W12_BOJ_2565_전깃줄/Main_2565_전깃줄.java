@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_2565_전깃줄 {
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) 2565_전깃줄
