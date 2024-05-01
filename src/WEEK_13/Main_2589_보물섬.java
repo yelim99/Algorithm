@@ -1,4 +1,4 @@
-package W13_BOJ_2589_보물섬;
+package WEEK_13;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_2589_보물섬 {
 
 	static int n, m;
 	static char[][] map;

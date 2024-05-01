@@ -1,11 +1,11 @@
-package W13_BOJ_1915_가장큰정사각형;
+package WEEK_13;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_1915_가장큰정사각형 {
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) 1915_가장 큰 정사각형

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_1043_거짓말 {
 	
 	static int n, m;
 	static int x;	// 진실을 아는 사람의 수
