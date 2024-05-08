@@ -1,11 +1,11 @@
-package W14_BOJ_17406_배열돌리기4;
+package WEEK_14;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_17406_배열돌리기4 {
 
 	static int n, m, k;	// 배열 크기 n*m, 회전 연산 개수 k
 	static int[][] arr;	// 배열

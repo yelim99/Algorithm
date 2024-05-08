@@ -1,8 +1,8 @@
-package W14_BOJ_2293_동전1;
+package WEEK_14;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_2293_동전1 {
 
 	public static void main(String[] args) {
 		/* 문제) 2293_ 동전1
