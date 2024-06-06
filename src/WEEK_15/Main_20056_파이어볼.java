@@ -1,4 +1,4 @@
-package W15_BOJ_20056_상어파이어볼;
+package WEEK_15;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_20056_파이어볼 {
 	
 	static class fireBalls {
 		int r, c, m, s, d;

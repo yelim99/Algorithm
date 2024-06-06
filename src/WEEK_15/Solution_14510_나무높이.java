@@ -1,10 +1,10 @@
-package W15_SWEA_14510_나무높이;
+package WEEK_15;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Solution {
+public class Solution_14510_나무높이 {
 
 	public static void main(String[] args) {
 		/* 문제) 14510_나무 높이

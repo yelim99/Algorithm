@@ -3,7 +3,7 @@ package W15_BOJ_1339_단어수학;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Main {
+public class Main_1339_단어수학 {
 
 	public static void main(String[] args) {
 		/* 문제) 1339_단어수학
