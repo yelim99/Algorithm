@@ -1,9 +1,9 @@
-package W16_PRG_가장많이받은선물;
+package WEEK_16;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Solution {
+public class Solution_PGS_가장많이받은선물 {
 
 	public static void main(String[] args) {
 		// 문제) 프로그래머스_가장 많이 받은 선물

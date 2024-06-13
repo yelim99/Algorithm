@@ -1,4 +1,4 @@
-package W13_BOJ_1043_거짓말;
+package 시도중;
 
 import java.io.BufferedReader;
 import java.io.IOException;

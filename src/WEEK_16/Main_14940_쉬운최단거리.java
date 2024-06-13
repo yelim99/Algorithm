@@ -1,4 +1,4 @@
-package W16_BOJ_14940_쉬운최단거리;
+package WEEK_16;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_14940_쉬운최단거리 {
 	
 	static int n, m;
 	static int[][] map;

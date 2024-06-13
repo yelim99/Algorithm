@@ -1,4 +1,4 @@
-package W12_BOJ_2565_전깃줄;
+package 시도중;
 
 import java.io.BufferedReader;
 import java.io.IOException;

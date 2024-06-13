@@ -1,6 +1,6 @@
-package W8_BOJ_15685_드래곤커브;
+package 시도중;
 
-public class Main {
+public class Main_15685_드래곤커브 {
 
 	public static void main(String[] args) {
 		/* 문제) 드래곤 커브

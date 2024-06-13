@@ -1,9 +1,9 @@
-package W16_PRG_신규아이디추천;
+package WEEK_16;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Solution {
+public class Solution_PGS_신규아이디추천 {
 
 	public static void main(String[] args) {
 		/* 문제) 프로그래머스_신규 아이디 추천

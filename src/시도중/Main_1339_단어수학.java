@@ -1,4 +1,4 @@
-package W15_BOJ_1339_단어수학;
+package 시도중;
 
 import java.util.HashMap;
 import java.util.Scanner;

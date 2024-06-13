@@ -1,11 +1,11 @@
-package W16_BOJ_9465_스티커;
+package WEEK_16;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_9465_스티커 {
 
 	public static void main(String[] args) throws IOException {
 		/* 문제) 9465_스티커

@@ -1,11 +1,11 @@
-package W16_BOJ_12852_1로만들기2;
+package WEEK_16;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+public class Main_12852_1로만들기2 {
 
 	public static void main(String[] args) {
 		/* 문제) 12852_1로 만들기2
