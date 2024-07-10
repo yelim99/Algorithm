@@ -1,10 +1,10 @@
-package W17_BOJ_5430_AC;
+package WEEK_17;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Scanner;
 
-public class Main {
+public class Main_5430_AC {
 	
 	static StringBuilder sb;
 

@@ -1,4 +1,4 @@
-package W17_BOJ_1389_케빈베이컨;
+package WEEK_17;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_1389_케빈베이컨 {
 
 	static int n, m;
 	static List<List<Integer>> graph = new ArrayList<>();

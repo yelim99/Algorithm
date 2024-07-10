@@ -1,4 +1,4 @@
-package W17_BOJ_2458_키순서;
+package WEEK_17;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main_2458_키순서 {
 	
 	static int n, m;
 	static List<Integer>[][] graph;	// 키 큰 경우 작은 경우 나누기 위해서

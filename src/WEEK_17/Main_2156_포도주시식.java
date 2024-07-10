@@ -1,8 +1,8 @@
-package W17_BOJ_2156_포도주시식;
+package WEEK_17;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_2156_포도주시식 {
 
 	public static void main(String[] args) {
 		/* 문제) 2156_포도주 시식
